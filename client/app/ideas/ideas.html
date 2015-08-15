@@ -6,6 +6,8 @@
     <simple-idea on-create="updateList(newIdea)"></simple-idea>
     <div class="container">
         <div class="row">
+            <h2>Newest Ideas</h2>
+
             <div class="container-fluid well">
                 <h2>Search</h2>
 
@@ -14,14 +16,16 @@
                            placeholder="Start typing to begin searching..."/>
                 </div>
             </div>
-            <h2>Newest Ideas</h2>
-            <section id="pinBoot">
-                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item white-panel"></idea-card>
-            </section>
+
+            <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1">
+                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+            </div>
+
 
         </div>
     </div>
+</div>
 
-    <script src="app/ideas/responsivegrid.js"></script>
+<script src="app/ideas/responsivegrid.js"></script>
 
 
