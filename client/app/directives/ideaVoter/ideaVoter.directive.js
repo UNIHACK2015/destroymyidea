@@ -13,17 +13,23 @@ angular.module('unihack2015App')
                 scope.voted = 0;
                 scope.$watch(attrs.idea, function (idea) {
                     if (idea) {
-                        if (Auth.isLoggedIn()) {
+                        idea.$promise.then(function () {
+                            if (Auth.isLoggedIn()) {
 
-                            var index = _.findIndex(Auth.getCurrentUser().votes.ideas, function (check) {
-                                return check.idea_id == idea._id;
-                            });
+                                var index = _.findIndex(Auth.getCurrentUser().votes.ideas, function (check) {
+                                    console.log(idea);
+
+                                    console.log(check.idea_id + ' vs ' + idea._id);
+                                    return check.idea_id == idea._id;
+                                });
 
 
-                            if (index > -1) {
-                                scope.voted = Auth.getCurrentUser().votes.ideas[index].vote;
+                                if (index > -1) {
+                                    scope.voted = Auth.getCurrentUser().votes.ideas[index].vote;
+                                }
                             }
-                        }
+                        });
+
                     }
 
                 }, false);
