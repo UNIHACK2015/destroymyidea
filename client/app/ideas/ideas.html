@@ -4,17 +4,28 @@
 <div class="container">
 
     <simple-idea on-create="updateList(newIdea)"></simple-idea>
+    <div class="container">
+        <div class="row">
+            <h2>Newest Ideas</h2>
 
-    <h1>Ideas</h1>
+            <div class="container-fluid well">
+                <h2>Search</h2>
 
-    <div class="container-fluid well">
-        <h2>Search</h2>
-        <div class="form-group">
-            <input type="text" class="form-control" ng-model="searchText" ng-change="search()" placeholder="Start typing to begin searching..." />
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="searchText" ng-change="search()"
+                           placeholder="Start typing to begin searching..."/>
+                </div>
+            </div>
+
+            <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1">
+                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+            </div>
+
+
         </div>
     </div>
-
-    <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1">
-        <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
-    </div>
 </div>
+
+<script src="app/ideas/responsivegrid.js"></script>
+
+
