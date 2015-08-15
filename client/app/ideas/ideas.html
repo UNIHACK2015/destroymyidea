@@ -1,0 +1,13 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+
+<div class="container">
+
+    <simple-idea on-create="updateList(newIdea)"></simple-idea>
+
+    <h1>Ideas</h1>
+
+    <div class="List List--col-md-3">
+        <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+    </div>
+</div>

@@ -5,6 +5,9 @@ angular.module('unihack2015App')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }, {
+      'title': 'Ideas',
+      'link': '/ideas'
     }];
 
     $scope.isCollapsed = true;

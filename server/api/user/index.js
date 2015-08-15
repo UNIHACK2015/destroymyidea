@@ -14,4 +14,9 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 
+/**
+ * Checks if a user has already voted on an idea or comment before
+ */
+router.post('/:id/voted', auth.isAuthenticated(), controller.hasVoted);
+
 module.exports = router;

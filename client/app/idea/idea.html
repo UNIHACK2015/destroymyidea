@@ -1,0 +1,54 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{ idea.name }}</h1>
+      <idea-voter idea="idea"></idea-voter>
+    </div>
+    <div class="col-md-12">
+      <div class="well well-lg">
+        {{ idea.description }}
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-hide="isLoggedIn()">
+    <div class="col-md-12 text-center">
+      <p>Please <a href="/login">login</a> to comment. </p>
+    </div>
+  </div>
+  <div class="row" ng-hide="!isLoggedIn()">
+    <form ng-submit="postComment()" method="post">
+      <div class="col-md-11">
+        <input class="form-control" type="text" ng-model="comment"/>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Criticize</button>
+      </div>
+    </form>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>What other people are saying...</h3>
+
+      <div class="panel panel-default" ng-repeat="comment in idea.comments">
+        <div class="panel-body">
+          {{ comment.criticism }}
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-lg-10">
+              @{{ comment.user_id.username }}
+            </div>
+            <div class="col-lg-2 text-right" ng-hide="!isLoggedIn()">
+              <i class="glyphicon glyphicon-thumbs-up" ng-click="upvoteComment(comment._id)"></i> {{ comment.rating.upvotes }} <i
+              class="glyphicon glyphicon-thumbs-down" ng-click="downvoteComment(comment._id)"></i> {{ comment.rating.downvotes }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

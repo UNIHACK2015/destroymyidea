@@ -6,6 +6,9 @@ angular.module('unihack2015App')
       id: '@_id'
     },
     {
+      update: {
+        method: 'PUT'
+      },
       changePassword: {
         method: 'PUT',
         params: {
@@ -16,6 +19,12 @@ angular.module('unihack2015App')
         method: 'GET',
         params: {
           id:'me'
+        }
+      },
+      hasVoted: {
+        method: 'POST',
+        params: {
+          controller: 'voted'
         }
       }
 	  });

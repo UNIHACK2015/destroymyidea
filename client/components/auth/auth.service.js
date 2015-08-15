@@ -3,6 +3,7 @@
 angular.module('unihack2015App')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
+
     if($cookieStore.get('token')) {
       currentUser = User.get();
     }
@@ -141,6 +142,12 @@ angular.module('unihack2015App')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      updateCurrentUser: function () {
+        if($cookieStore.get('token')) {
+          currentUser = User.get();
+        }
       }
     };
   });
