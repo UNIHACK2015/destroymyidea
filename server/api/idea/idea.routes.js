@@ -22,27 +22,56 @@ routes.get('/search', function (req, res) {
   });
 });
 
+var pager = require('../../components/restapi/pager');
+
 routes.get('/', function (req, res) {
-  IdeaModel.find().populate('user_id comments').populate('comments.user_id', 'username')
-    .exec(function (err, items) {
-      if (err) {
-        return handleError(res, err);
-      }
-      return res.status(200).json(items);
-    });
+    var query = IdeaModel.find();
+    if (req.query.sort) {
+        console.log('sorting');
+        var sort = {};
+        switch (req.query.sort) {
+            case 'best':
+                sort['rating.back_it'] = -1;
+                break;
+            case 'worst':
+                sort['rating.destroy_it'] = -1;
+                break;
+            case 'new':
+            default:
+                sort.timestamp = -1;
+
+        }
+        query = query.sort(sort);
+        query = pager(req, query);
+    } else {
+        console.log('not sorting');
+    }
+
+    if(req.query.page) {
+      var perPage = 10;
+      var offset = req.query.page * perPage;
+      query.skip(offset).limit(perPage);
+    }
+
+    query.exec(function (err, items) {
+        if (err) {
+            return handleError(res, err);
+        }
+        return res.status(200).json(items);
+    })
 });
 
 routes.get('/:id', function (req, res) {
-  IdeaModel.findById(req.params.id).populate('user_id comments comments.replies.user_id')
-    .populate('comments.user_id', 'username').exec(function (err, item) {
-      if (err) {
-        return handleError(res, err);
-      }
-      if (!item) {
-        return res.status(404).send('Not Found');
-      }
-      return res.json(item);
-    });
+    IdeaModel.findById(req.params.id).populate('user_id comments comments.replies.user_id')
+        .populate('comments.user_id', 'username').exec(function (err, item) {
+            if (err) {
+                return handleError(res, err);
+            }
+            if (!item) {
+                return res.status(404).send('Not Found');
+            }
+            return res.json(item);
+        });
 });
 
 routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
@@ -107,17 +136,17 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
   IdeaModel.findById(req.params.ideaId, function (err, idea) {
     var change = req.body.change;
 
-    var backit = 0;
-    var destroyit = 0;
+        var backit = 0;
+        var destroyit = 0;
 
-    if (err) {
-      return handleError(res, err);
-    }
+        if (err) {
+            return handleError(res, err);
+        }
 
-    // find comment
-    var foundCommentIndex = _.findIndex(req.user.votes.comments, function (comment) {
-      return comment.comment_id == req.params.commentId;
-    });
+        // find comment
+        var foundCommentIndex = _.findIndex(req.user.votes.comments, function (comment) {
+            return comment.comment_id == req.params.commentId;
+        });
 
     if (foundCommentIndex >= 0) {
       console.log('index: ' + foundCommentIndex);
@@ -166,21 +195,6 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
       return res.status(200).json(item);
     });
 
-  });
-});
-
-/**
- * This is for the infinite scroll.
- * Loading of Ideas in chunks
- */
-routes.get('/ideas', function(req, res) {
-  var perPage = 10;
-  var offset = req.params.page * perPage;
-  IdeaModel.find().skip(offset).limit(perPage).exec(function(err, ideas) {
-    if (err) {
-      return handleError(res, err);
-    }
-    return res.status(200).json(ideas);
   });
 });
 

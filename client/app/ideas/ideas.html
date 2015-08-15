@@ -16,12 +16,15 @@
                            placeholder="Start typing to begin searching..."/>
                 </div>
             </div>
-
-            <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1" infinite-scroll="loadIdeas()">
-                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+            <div class="">
+                <button ng-click="sort('best')">Best</button>
+                <button ng-click="sort('best')">Worst</button>
+                <button ng-click="sort('best')">New</button>
             </div>
 
-
+            <div class="List List--col-md-3  List--col-sm-2 List--col-xs-1" infinite-scroll="loadData()">
+                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+            </div>
         </div>
     </div>
 </div>
