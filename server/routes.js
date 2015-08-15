@@ -20,7 +20,7 @@ module.exports = function(app) {
 
   app.use('/auth', require('./auth'));
 
-  app.use('/ideas', IdeaRoutes);
+  app.use('/api/ideas', IdeaRoutes);
   app.use('/comments', CommentRoutes);
   app.use('/badges', BadgeRoutes);
 
