@@ -37,7 +37,11 @@ User.find({}).remove(function () {
       name: 'Test User',
       username: 'testuser',
       email: 'test@test.com',
-      password: 'test'
+      password: 'test',
+      points: '500',
+      badges: [{'id':'020','name': 'The Destroyer of Worlds'},
+      {'id':'030','name': 'The Destroyer of Universes'},
+      {'id':'015','name': 'The Destroyer of Dreams'}]
     }, {
       provider: 'local',
       role: 'admin',

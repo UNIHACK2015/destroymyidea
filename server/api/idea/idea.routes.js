@@ -185,8 +185,8 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
     }
 
     // add/remove from user points
-    idea.user_id.points += backit;
-    idea.user_id.points -= destroyit;
+    //idea.user_id.points += backit;
+    //idea.user_id.points -= destroyit;
 
     idea.save(function (err, item) {
       if (err) {
