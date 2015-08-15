@@ -1,0 +1,9 @@
+.unstyled-link {
+  color: #000;
+  text-decoration: none;
+
+  &:hover, &:active, &:visited, &:focus {
+    color: #000;
+    text-decoration: none;
+  }
+}

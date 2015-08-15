@@ -21,8 +21,8 @@ module.exports = function(app) {
   app.use('/auth', require('./auth'));
 
   app.use('/api/ideas', IdeaRoutes);
-  app.use('/comments', CommentRoutes);
-  app.use('/badges', BadgeRoutes);
+  app.use('/api/badges', BadgeRoutes);
+  app.use('/api/comments', CommentRoutes);
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

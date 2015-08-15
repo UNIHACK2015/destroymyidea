@@ -3,17 +3,26 @@
  */
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
+
+var Comment = require('../comment/comment.model.js');
 
 var IdeaSchema = new Schema({
-    user_id: Schema.Types.ObjectId,
-    name: String,
-    description: String,
-    rating: {
-      back_it: Number,
-      destroy_it: Number
+  user_id: {type: Schema.Types.ObjectId, ref: 'User'},
+  name: String,
+  description: String,
+  rating: {
+    back_it: {
+      type: Number,
+      default: 0
     },
-    timestamp: {type: Date, default: Date.now}
+    destroy_it: {
+      type: Number,
+      default: 0
+    }
+  },
+  comments: [Comment.schema],
+  timestamp: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Idea', IdeaSchema);

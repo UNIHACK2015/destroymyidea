@@ -4,7 +4,7 @@
 'use strict';
 
 module.exports = function (model) {
-
+    var _ = require('lodash');
     var routes = {};
 
     routes.index = function(req, res) {
@@ -40,7 +40,7 @@ module.exports = function (model) {
         model.findById(req.params.id, function (err, item) {
             if (err) { return handleError(res, err); }
             if(!item) { return res.status(404).send('Not Found'); }
-            var updated = _.merge(item, req.body);
+            var updated = _.assign(item, req.body);
             updated.save(function (err) {
                 if (err) { return handleError(res, err); }
                 return res.status(200).json(item);

@@ -1,0 +1,11 @@
+<div class="IdeaCard">
+    <a ui-sref="idea({id: idea._id})" class="Card Card--link">
+        <h3>{{ idea.name }}</h3>
+        Testing
+        <p>{{ idea.description }}</p>
+    </a>
+
+    <div class="IdeaCard_VoteRow">
+        <idea-voter idea="idea"></idea-voter>
+    </div>
+</div>
