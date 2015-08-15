@@ -16,7 +16,15 @@ function handleError(res, err) {
 };
 
 routes.get('/search', function (req, res) {
-    IdeaModel.find({name: new RegExp(req.query.title, "i")}, function (err, ideas) {
+    var searchConfig = {};
+    if(req.query.title) {
+        searchConfig.name = new RegExp(req.query.title, "i");
+    }
+    if(req.query.user_id) {
+        searchConfig.user_id = new RegExp(req.query.user_id, "i");
+    }
+
+    IdeaModel.find(searchConfig, function (err, ideas) {
         if (err) handleError(res, err);
         res.status(200).json(ideas || []);
     });
@@ -188,6 +196,7 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
                 return handleError(res, err);
             }
             return res.status(200).json(item);
+        });
         });
     });
 });
