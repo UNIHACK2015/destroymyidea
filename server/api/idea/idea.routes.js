@@ -64,7 +64,7 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
                 backit = -1;
                 destroyit = req.body.change == -1 ? 1 : 0;
             } else if (foundComment.vote == -1) {
-                backit = req.body.change == 1 ? 1 : 0;;
+                backit = req.body.change == 1 ? 1 : 0;
                 destroyit = -1;
             }
             req.user.votes.ideas[foundCommentIndex].vote = req.body.change == foundComment.vote ? 0 : req.body.change;
