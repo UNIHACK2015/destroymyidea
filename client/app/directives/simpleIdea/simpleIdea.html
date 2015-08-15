@@ -1,0 +1,27 @@
+<div class="well">
+    <div class="alert alert-success" ng-if="successes.length" ng-repeat="success in successes">{{ success }}</div>
+    <div class="alert alert-danger" ng-if="errors.length" ng-repeat="error in errors">{{ error }}</div>
+
+    <div ng-if="status=='creating'">
+        <h2>What is your idea?</h2>
+        <form class="form-horizontal" ng-submit="createIdea()">
+            <div class="form-group">
+                <div class="col-xs-10">
+                    <input class="form-control"
+                           ng-model="newIdea.name"
+                           placeholder="What is your BIG idea?"
+                           style="padding: 20px;"/>
+                </div>
+
+                <div class="col-xs-2">
+                    <input type="submit" class="btn btn-primary col-sm-2"
+                           style="height: 40px; width: 100%; line-height: 30px;" value="Submit"/>
+
+                </div>
+
+            </div>
+            <a ui-sref="createidea">Provide more information</a>
+        </form>
+    </div>
+
+</div>

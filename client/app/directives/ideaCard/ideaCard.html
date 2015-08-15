@@ -1,0 +1,12 @@
+<div class="IdeaCard">
+    <a ui-sref="idea({id: idea._id})" class="Card Card--link">
+        <h3>{{ idea.name }}</h3>
+        Testing
+        <p>{{ idea.description }}</p>
+    </a>
+
+    <div class="Vote">
+        <button class="Vote_Back" ng-click="upvote()"><i class="fa fa-thumbs-o-up fa-2x"></i></button>
+        <button class="Vote_Destroy" ng-click="downvote()"><i class="fa fa-thumbs-o-down fa-2x"></i></button>
+    </div>
+</div>

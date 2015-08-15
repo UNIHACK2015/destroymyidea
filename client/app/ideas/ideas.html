@@ -3,29 +3,11 @@
 
 <div class="container">
 
-    <div class="well">
-        <h2>What is your idea?</h2>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <div class="col-sm-10 col-xs-12">
-                    <input class="form-control" placeholder="What is your BIG idea?" style="font-size: 140%; height: 40px;" />
-                </div>
-                <br class="visible-xs"/>
-                <br class="visible-xs"/>
-                <br class="visible-xs"/>
-                <div class="col-sm-2 col-xs-12">
-                    <button class="btn btn-primary col-sm-2" style="height: 40px; width: 100%;">Submit</button>
-                </div>
-            </div>
-        </form>
-
-    </div>
+    <simple-idea on-create="updateList(newIdea)"></simple-idea>
 
     <h1>Ideas</h1>
+
     <div class="List List--col-md-3">
-        <a ui-sref="idea({id: idea._id})" class="List_Item Card Card--link" ng-repeat="idea in ideas">
-            <h3>{{ idea.name }}</h3>
-            <p>{{ idea.description }}</p>
-        </a>
+        <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
     </div>
 </div>
