@@ -7,6 +7,13 @@
 
     <h1>Ideas</h1>
 
+    <div class="container-fluid well">
+        <h2>Search</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="searchText" ng-change="search()" placeholder="Start typing to begin searching..." />
+        </div>
+    </div>
+
     <div class="List List--col-md-3">
         <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
     </div>
