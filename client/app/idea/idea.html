@@ -11,7 +11,12 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-hide="isLoggedIn()">
+    <div class="col-md-12 text-center">
+      <p>Please <a href="/login">login</a> to comment. </p>
+    </div>
+  </div>
+  <div class="row" ng-hide="!isLoggedIn()">
     <form ng-submit="postComment()" method="post">
       <div class="col-md-11">
         <input class="form-control" type="text" ng-model="comment"/>
@@ -32,7 +37,7 @@
           {{ comment.criticism }}
         </div>
         <div class="panel-footer">
-
+          {{ comment.user_id.username }}
         </div>
       </div>
     </div>
