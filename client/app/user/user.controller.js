@@ -1,42 +1,45 @@
 'use strict';
 
 angular.module('unihack2015App')
-  .controller('UserCtrl', function ($scope) {
-    $scope.user = 
-    // User.get('me');
-    // console.log($scope.user);
-    	{
-    		'username' : 'TheKiller',
-    		'userImgPath' : '../../assets/images/person.png',
-    		'reputation': 500,
-    		'level': 0,
-    		'remainingXp': 0,
-    		'levelCurrentXp': 0,
-    		'levelTotalXp': 0,
-    		'levelPercentage': 0,
-    		'badges': [
-    			{
-    				'badgeName': 'DYNAMITE',
-    				'badgeDescription': 'Made your first comment',
-    				'badgeImgPath': '../../assets/images/badges/bomb.png'
-    			},
-    			{
-    				'badgeName': 'DYNAMITE',
-    				'badgeDescription': 'Made your first comment',
-    				'badgeImgPath': '../../assets/images/badges/bomb.png'
-    			},
-    			{
-    				'badgeName': 'DYNAMITE',
-    				'badgeDescription': 'Made your first comment',
-    				'badgeImgPath': '../../assets/images/badges/bomb.png'
-    			},
-    			{
-    				'badgeName': 'DYNAMITE',
-    				'badgeDescription': 'Made your first comment',
-    				'badgeImgPath': '../../assets/images/badges/bomb.png'
-    			}
-    		]
-    	};
+  .controller('UserCtrl', function ($scope, User, $state) {
+    $scope.user = {};
+    User.getByUName({ 'username' : $state.params.userid }, function (user) {
+    	$scope.user = user;
+    	$scope.user.userImgPath = 'http://lorempixel.com/g/300/300/abstract';
+    	generateLevelData($scope.user.points);
+    });
+    	// {
+    	// 	'username' : 'TheKiller',
+    	// 	'userImgPath' : '../../assets/images/person.png',
+    	// 	'reputation': 500,
+    	// 	'level': 0,
+    	// 	'remainingXp': 0,
+    	// 	'levelCurrentXp': 0,
+    	// 	'levelTotalXp': 0,
+    	// 	'levelPercentage': 0,
+    	// 	'badges': [
+    	// 		{
+    	// 			'badgeName': 'DYNAMITE',
+    	// 			'badgeDescription': 'Made your first comment',
+    	// 			'badgeImgPath': '../../assets/images/badges/bomb.png'
+    	// 		},
+    	// 		{
+    	// 			'badgeName': 'DYNAMITE',
+    	// 			'badgeDescription': 'Made your first comment',
+    	// 			'badgeImgPath': '../../assets/images/badges/bomb.png'
+    	// 		},
+    	// 		{
+    	// 			'badgeName': 'DYNAMITE',
+    	// 			'badgeDescription': 'Made your first comment',
+    	// 			'badgeImgPath': '../../assets/images/badges/bomb.png'
+    	// 		},
+    	// 		{
+    	// 			'badgeName': 'DYNAMITE',
+    	// 			'badgeDescription': 'Made your first comment',
+    	// 			'badgeImgPath': '../../assets/images/badges/bomb.png'
+    	// 		}
+    	// 	]
+    	// };
 
     function generateLevelData(reputation) {
     	var level = 0;
@@ -74,9 +77,6 @@ angular.module('unihack2015App')
     	console.log('remainingXp: ' + $scope.user.remainingXp);
     	console.log('levelTotalXp: ' + $scope.user.levelTotalXp);
     	console.log('levelPercentage: ' + $scope.user.levelPercentage);
-
     }
 
-    generateLevelData($scope.user.reputation);
-    console.log($scope.user.reputation);
   });

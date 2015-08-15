@@ -1,10 +1,10 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class='container'>
 	<div class="col-md-12">
-
 		<div style="height: 200px;">
-			<img ng-src='{{ user.userImgPath }}' style='float: left; width: 250px;'>
-			<div style='margin: 20px;'>
+			<img ng-src='{{ user.userImgPath }}' style='float: left; width: 150px; margin: 20px;'>
+			<div style='padding: 20px;'>
 				<span class='h2'>{{ user.username }}</span>
 				<div class="progress">
 				  <div class="progress-bar" role="progressbar" aria-valuenow="70"
@@ -14,12 +14,46 @@
 				<span><span>Level: {{ user.level }}</span><span style="float: right;">{{ user.levelCurrentXp }} / {{ user.levelTotalXp }}</span></span>
 			</div>
 		</div>
-
-		<span ng-repeat='badge in user.badges'>
-			<a href="#" popover-title={{badge.badgeName}} popover={{badge.badgeDescription}} popover-placement='bottom' popover-trigger='mouseenter'>
-				<img ng-src='{{ badge.badgeImgPath }}' style='width: 100px;'>
-			</a>
-		</span>
-
 	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Badges</h2>
+			<span ng-repeat='badge in user.badges'>
+				<img popover-title={{badge.name}} popover='The end is nigh.' popover-placement='bottom' popover-trigger='mouseenter' ng-src='{{ user.userImgPath }}' style='width: 100px;'>
+			</span>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Comments</h2>
+			<div ng-repeat=''>
+				<p><p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Ideas</h2>
+			<div ng-repeat=''>
+				<h3></h3>
+				<p><p>
+			</div>
+		</div>
+	</div>
+
 </div>
+
+<footer class="footer">
+    <div class="container">
+        <p>Copyright (c) 2015 The Paradoxical Iterators</p>
+
+        <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
+
+        <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
+
+        <p>Built for: UNIHACK 2015</p>
+    </div>
+</footer>

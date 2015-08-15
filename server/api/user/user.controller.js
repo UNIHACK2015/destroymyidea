@@ -20,6 +20,14 @@ exports.index = function (req, res) {
   });
 };
 
+exports.getByUsername = function (req, res) {
+User.findOne({username: req.params.username}, '-salt -hashedPassword', function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(404).send('Not Found');
+    res.json(user);
+  });
+};
+
 /**
  * Creates a new user
  */
