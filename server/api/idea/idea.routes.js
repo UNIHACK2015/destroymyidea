@@ -26,7 +26,7 @@ routes.get('/', function (req, res) {
 });
 
 routes.get('/:id', function (req, res) {
-  IdeaModel.findById(req.params.id).populate('user_id comments')
+  IdeaModel.findById(req.params.id).populate('user_id comments comments.replies.user_id')
     .populate('comments.user_id', 'username').exec(function (err, item) {
       if (err) {
         return handleError(res, err);
@@ -137,8 +137,11 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
     var ideaCommIndex = _.findIndex(idea.comments, function(comments) {
       return comments._id == req.params.commentId;
     });
-    idea.comments[ideaCommIndex].rating.upvotes += backit;
-    idea.comments[ideaCommIndex].rating.downvotes += destroyit;
+
+    if(idea.comments[ideaCommIndex]) {
+      idea.comments[ideaCommIndex].rating.upvotes += backit;
+      idea.comments[ideaCommIndex].rating.downvotes += destroyit;
+    }
 
     idea.save(function (err, item) {
       if (err) {

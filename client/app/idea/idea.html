@@ -20,7 +20,7 @@
   <div class="row" ng-hide="!isLoggedIn()">
     <form ng-submit="postComment()" method="post">
       <div class="col-md-11">
-        <input class="form-control" type="text" ng-model="comment"/>
+        <input class="form-control" type="text" ng-model="comment" ng-minlength="3"/>
       </div>
       <div class="col-md-1">
         <button type="submit" class="btn btn-primary">Criticize</button>
@@ -36,15 +36,43 @@
       <div class="panel panel-default" ng-repeat="comment in idea.comments">
         <div class="panel-body">
           {{ comment.criticism }}
+          <br/>
+          <div class="panel panel-default" ng-repeat="reply in comment.replies">
+            <div class="panel-body">
+              {{ reply.criticism }}
+            </div>
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col-lg-10">
+                  @{{reply.user_id.username }}
+                </div>
+                <div class="col-lg-2 text-right" ng-hide="!isLoggedIn()">
+                  <i class="glyphicon glyphicon-thumbs-up" ng-click="upvoteComment(reply._id)"></i> {{
+                  reply.rating.upvotes }} <i
+                  class="glyphicon glyphicon-thumbs-down" ng-click="downvoteComment(reply._id)"></i> -{{
+                  reply.rating.downvotes }}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="panel-footer">
           <div class="row">
             <div class="col-lg-10">
-              @{{ comment.user_id.username }}
+              <a role="button" data-toggle="collapse" href="#collapseExample"
+                 aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-reply"></i> Reply to:</a> @{{
+              comment.user_id.username }}
             </div>
             <div class="col-lg-2 text-right" ng-hide="!isLoggedIn()">
-              <i class="glyphicon glyphicon-thumbs-up" ng-click="upvoteComment(comment._id)"></i> {{ comment.rating.upvotes }} <i
-              class="glyphicon glyphicon-thumbs-down" ng-click="downvoteComment(comment._id)"></i> -{{ comment.rating.downvotes }}
+              <i class="glyphicon glyphicon-thumbs-up" ng-click="upvoteComment(comment._id)"></i> {{
+              comment.rating.upvotes }} <i
+              class="glyphicon glyphicon-thumbs-down" ng-click="downvoteComment(comment._id)"></i> -{{
+              comment.rating.downvotes }}
+            </div>
+          </div><br/>
+          <div class="row">
+            <div class="collapse" id="collapseExample">
+              <input class="form-control" ng-enter="replyToComment(comment._id, reply)" ng-model="reply" type="text" ng-minlength="3" placeholder="Write a reply..."/>
             </div>
           </div>
         </div>
