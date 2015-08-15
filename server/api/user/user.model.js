@@ -20,7 +20,11 @@ var UserSchema = new Schema({
   badges: [{type: Schema.Types.ObjectId, ref: 'Badge'}],
   votes: {
     ideas: [{
-      idea_id: {type: Schema.Types.ObjectId, ref: 'Idea'}, vote: Number
+      idea_id: {type: Schema.Types.ObjectId, ref: 'Idea'},
+      vote: {
+        type: Number,
+        default: 0
+      }
     }],
     comments: [{
       comment_id: {type: Schema.Types.ObjectId, ref: 'Comment'}, vote: Number

@@ -11,8 +11,8 @@ var CommentSchema = new Schema({
   user_id: {type: Schema.Types.ObjectId, ref: 'User'},
   criticism: String,
   rating: {
-    upvotes: Number,
-    downvotes: Number
+    upvotes: {type: Number, default: 0},
+    downvotes: {type: Number, default: 0}
   },
   timestamp: {type: Date, default: Date.now}
 });

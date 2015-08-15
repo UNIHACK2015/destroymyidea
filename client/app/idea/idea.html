@@ -37,7 +37,15 @@
           {{ comment.criticism }}
         </div>
         <div class="panel-footer">
-          {{ comment.user_id.username }}
+          <div class="row">
+            <div class="col-lg-10">
+              @{{ comment.user_id.username }}
+            </div>
+            <div class="col-lg-2 text-right" ng-hide="!isLoggedIn()">
+              <i class="glyphicon glyphicon-thumbs-up" ng-click="upvoteComment(comment._id)"></i> {{ comment.rating.upvotes }} <i
+              class="glyphicon glyphicon-thumbs-down" ng-click="downvoteComment(comment._id)"></i> {{ comment.rating.downvotes }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

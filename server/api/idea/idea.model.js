@@ -12,8 +12,14 @@ var IdeaSchema = new Schema({
   name: String,
   description: String,
   rating: {
-    back_it: Number,
-    destroy_it: Number
+    back_it: {
+      type: Number,
+      default: 0
+    },
+    destroy_it: {
+      type: Number,
+      default: 0
+    }
   },
   comments: [Comment.schema],
   timestamp: {type: Date, default: Date.now}

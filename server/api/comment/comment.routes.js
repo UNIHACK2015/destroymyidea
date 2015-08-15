@@ -7,4 +7,6 @@ var CommentModel = require('./comment.model.js');
 
 var commentRoutes = new RESTRouter(CommentModel.model);
 
-module.exports = commentRoutes.generateRoutes();
+var routes =  commentRoutes.generateRoutes();
+
+module.exports = routes;

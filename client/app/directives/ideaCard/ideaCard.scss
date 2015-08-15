@@ -1,0 +1,30 @@
+
+.IdeaCard {
+  position: relative;
+
+  .Vote {
+    text-align: center;
+    padding: 10px;
+    background-color: #ddd;
+
+    .Vote_Back, .Vote_Destroy {
+      padding: 5px;
+      border: 0;
+      background-color: transparent;
+    }
+
+    .Vote_Back {
+      color: green;
+      &:hover {
+        color: #004400;
+      }
+    }
+
+    .Vote_Destroy {
+      color: red;
+      &:hover {
+        color: #7a0000;
+      }
+    }
+  }
+}

@@ -7,7 +7,11 @@ angular.module('unihack2015App')
         }, {
           update: {
             method: 'PUT'
-          }
+          },
+            vote: {
+                method: 'PUT',
+                url: '/api/ideas/:id/vote'
+            }
         });
 
   }]);
