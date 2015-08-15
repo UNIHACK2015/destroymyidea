@@ -12,6 +12,7 @@
         <article class="white-panel">
           <h4><a href="#">{{ ideas[0].name }}</a></h4>
 
+
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
             ea commodo consequat. Duis aute
@@ -83,6 +84,17 @@
 
       </section>
       <hr>
+
+    <div class="container-fluid well">
+        <h2>Search</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="searchText" ng-change="search()" placeholder="Start typing to begin searching..." />
+        </div>
+    </div>
+
+    <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1">
+        <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+
     </div>
     <p>
       <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbootsnipp.com%2Fiframe%2FZkk0O" target="_blank">
