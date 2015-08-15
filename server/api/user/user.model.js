@@ -16,7 +16,7 @@ var UserSchema = new Schema({
   salt: String,
 
   active_badge: {type: Schema.Types.ObjectId, ref: 'Badge'},
-  points: Number,
+  points: {type: Number, default: 0},
   badges: [{type: Schema.Types.ObjectId, ref: 'Badge'}],
   votes: {
     ideas: [{

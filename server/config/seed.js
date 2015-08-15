@@ -105,6 +105,69 @@ Idea.find({}).remove(function () {
       }, {
         name: 'Hello WwwWWW',
         description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
+      }, {
+        name: 'Hello WwwWWW',
+        description: 'WWWWWW'
       }, function () {
       console.log('finished populating users');
     }

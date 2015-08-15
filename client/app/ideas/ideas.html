@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1">
+            <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1" infinite-scroll="loadIdeas()">
                 <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
             </div>
 
