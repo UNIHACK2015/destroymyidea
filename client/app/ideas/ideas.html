@@ -3,109 +3,25 @@
 
 <div class="container">
 
-  <simple-idea on-create="updateList(newIdea)"></simple-idea>
-  <div class="container">
-    <div class="row">
-      <h2>Newest Ideas</h2>
-      <section id="pinBoot">
+    <simple-idea on-create="updateList(newIdea)"></simple-idea>
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid well">
+                <h2>Search</h2>
 
-        <article class="white-panel">
-          <h4><a href="#">{{ ideas[0].name }}</a></h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="searchText" ng-change="search()"
+                           placeholder="Start typing to begin searching..."/>
+                </div>
+            </div>
+            <h2>Newest Ideas</h2>
+            <section id="pinBoot">
+                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item white-panel"></idea-card>
+            </section>
 
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </article>
-
-        <article class="white-panel"><img src="http://i.imgur.com/8lhFhc1.gif" alt="">
-          <h4><a href="#">Title 2</a></h4>
-
-          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.</p>
-        </article>
-
-        <article class="white-panel"><img src="http://i.imgur.com/xOIMvAe.jpg" alt="">
-          <h4><a href="#">Title 3</a></h4>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </article>
-
-
-        <article class="white-panel"><img src="http://i.imgur.com/3gXW3L3.jpg" alt="">
-          <h4><a href="#">Title 4</a></h4>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </article>
-
-        <article class="white-panel"><img src="http://i.imgur.com/o2RVMqm.jpg" alt="">
-          <h4><a href="#">Title 5</a></h4>
-
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.</p>
-        </article>
-
-        <article class="white-panel"><img src="http://i.imgur.com/kFFpuKA.jpg" alt="">
-          <h4><a href="#">Title 6</a></h4>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </article>
-
-
-        <article class="white-panel"><img src="http://i.imgur.com/E9RmLPA.jpg" alt="">
-          <h4><a href="#">Title 7</a></h4>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </article>
-
-        <article class="white-panel"><img src="http://i.imgur.com/8lhFhc1.gif" alt="">
-          <h4><a href="#">Title 8</a></h4>
-
-          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.</p>
-        </article>
-
-      </section>
-      <hr>
-
-    <div class="container-fluid well">
-        <h2>Search</h2>
-        <div class="form-group">
-            <input type="text" class="form-control" ng-model="searchText" ng-change="search()" placeholder="Start typing to begin searching..." />
         </div>
     </div>
 
-    <div class="List List--col-md-3 List--col-sm-2 List--col-xs-1">
-        <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
-
-    </div>
-    <p>
-      <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbootsnipp.com%2Fiframe%2FZkk0O" target="_blank">
-        <small>HTML</small>
-        <sup>5</sup></a>
-      <br>
-      <br>
-    </p>
-  </div>
-</div>
-
-<script src="app/ideas/responsivegrid.js"></script>
+    <script src="app/ideas/responsivegrid.js"></script>
 
 
