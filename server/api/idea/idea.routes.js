@@ -17,10 +17,10 @@ function handleError(res, err) {
 
 routes.get('/search', function (req, res) {
     var searchConfig = {};
-    if(req.query.title) {
+    if (req.query.title) {
         searchConfig.name = new RegExp(req.query.title, "i");
     }
-    if(req.query.user_id) {
+    if (req.query.user_id) {
         searchConfig.user_id = new RegExp(req.query.user_id, "i");
     }
 
@@ -33,7 +33,14 @@ routes.get('/search', function (req, res) {
 var pager = require('../../components/restapi/pager');
 
 routes.get('/', function (req, res) {
-    var query = IdeaModel.find();
+    searchConfig = {};
+    if (req.query.title) {
+        searchConfig.name = new RegExp(req.query.title, "i");
+    }
+    if (req.query.user_id) {
+        searchConfig.user_id = new RegExp(req.query.user_id, "i");
+    }
+    var query = IdeaModel.find(searchConfig);
     if (req.query.sort) {
         console.log('sorting');
         var sort = {};
@@ -60,7 +67,7 @@ routes.get('/', function (req, res) {
             return handleError(res, err);
         }
         return res.status(200).json(items);
-    })
+    });
 });
 
 routes.get('/:id', function (req, res) {
@@ -117,7 +124,7 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
             });
             if (req.body.change === 1) {
                 backit += 1;
-            }  else if (req.body.change === -1) {
+            } else if (req.body.change === -1) {
                 destroyit += 1;
             }
         }
@@ -196,7 +203,6 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
                 return handleError(res, err);
             }
             return res.status(200).json(item);
-        });
         });
     });
 });

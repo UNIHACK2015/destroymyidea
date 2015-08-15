@@ -31,7 +31,7 @@ angular.module('unihack2015App')
                 $scope.ideas = newest;
                 updateGrid();
             } else {
-                Idea.search({title: $scope.searchText}, function (ideas) {
+                Idea.query({title: $scope.searchText}, function (ideas) {
                     $scope.ideas = ideas;
                 });
             }
