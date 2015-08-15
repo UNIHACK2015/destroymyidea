@@ -11,6 +11,7 @@ var IdeaSchema = new Schema({
   user_id: {type: Schema.Types.ObjectId, ref: 'User'},
   name: String,
   description: String,
+  images: [String],
   rating: {
     back_it: {
       type: Number,

@@ -14,6 +14,13 @@ function handleError(res, err) {
     return res.status(500).send(err);
 };
 
+routes.get('/search', function (req, res) {
+    IdeaModel.find({name: new RegExp(req.query.title, "i")}, function (err, ideas) {
+        if(err) handleError(res, err);
+        res.status(200).json(ideas || []);
+    });
+});
+
 routes.get('/', function (req, res) {
   IdeaModel.find().populate('user_id comments').populate('comments.user_id', 'username')
     .exec(function (err, items) {
