@@ -103,14 +103,21 @@ exports.authCallback = function (req, res, next) {
 /**
  * Check if user has voted on an idea/comment
  */
-exports.hasVoted = function (req, res) {
-  var id = req.body.obj_id;
-  User.find({_id: req.params.id})
-    .where(id).in('votes.ideas').or(id).in('votes.comments')
-    .exec(function (err, user) {
-      if (user) {
-        return res.status(200).json({voted: true});
-      }
-      return res.status(200).json({voted: false});
+exports.hasVoted = function (req) {
+  var id = req.obj_id;
+  var res = {};
+  User.find({_id: req.id}, function (err, user) {
+    var foundIdeaIndex = _.findIndex(user.votes.ideas, function (idea) {
+      return idea.idea_id == id;
     });
+
+    var foundCommentIndex = _.findIndex(user.votes.comments, function (comment) {
+      return comment.comment_id == id;
+    });
+
+    res.voted = (foundIdeaIndex || foundCommentIndex);
+    res.idea_index = foundIdeaIndex;
+    res.comment_index = foundCommentIndex;
+  });
+
 };
