@@ -4,20 +4,13 @@
 <div class="container">
 
   <simple-idea on-create="updateList(newIdea)"></simple-idea>
-
-  <h1>Ideas</h1>
-
   <div class="container">
     <div class="row">
-      <h2>Pinterest Responsive Grid</h2>
-
-      <p>Best viewed <a href="http://bootsnipp.com/iframe/Zkk0O" target="_blank">full screen</a>
-      </p>
-      <hr>
+      <h2>Newest Ideas</h2>
       <section id="pinBoot">
 
-        <article class="white-panel"><img src="http://i.imgur.com/sDLIAZD.png" alt="">
-          <h4><a href="#">Title 1</a></h4>
+        <article class="white-panel">
+          <h4><a href="#">{{ ideas[0].name }}</a></h4>
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
