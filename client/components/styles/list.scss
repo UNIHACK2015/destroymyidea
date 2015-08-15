@@ -1,0 +1,71 @@
+$listMinMargin: 1%;
+
+@function listCalculateWidth($columns) {
+  @return floor((100 - ($columns * $listMinMargin * 2)) / $columns);
+}
+
+@function listCalculateMargin($columns, $width) {
+  @return 100 % ($width * $columns) / ($columns * 2);
+}
+
+@mixin responsive-list-item($columns) {
+  $width: listCalculateWidth($columns);
+  $margin: listCalculateMargin($columns, $width);
+  width: $width;
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
+.List {
+  display: flex;
+  flex-flow: wrap;
+
+  .List_Item {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+}
+
+.List--col-xs-center { justify-content: center; }
+.List--col-sm-center { @media (min-width: $screen-sm-min) { justify-content: center; } }
+.List--col-md-center { @media (min-width: $screen-md-min) { justify-content: center; } }
+.List--col-lg-center { @media (min-width: $screen-lg-min) { justify-content: center; } }
+
+.List--col-xs-left { justify-content: flex-start; }
+.List--col-sm-left { @media (min-width: $screen-sm-min) { justify-content: flex-start; } }
+.List--col-md-left { @media (min-width: $screen-md-min) { justify-content: flex-start; } }
+.List--col-lg-left { @media (min-width: $screen-lg-min) { justify-content: flex-start; } }
+
+
+@for $colNum from 1 through 12 {
+  .List--col-xs-#{$colNum} {
+    .List_Item {
+      @include responsive-list-item($colNum);
+    }
+  }
+
+  .List--col-sm-#{$colNum} {
+    .List_Item {
+      @media (min-width: $screen-sm-min) {
+        @include responsive-list-item($colNum);
+      }
+    }
+  }
+
+  .List--col-md-#{$colNum} {
+    .List_Item {
+      @media (min-width: $screen-md-min) {
+        @include responsive-list-item($colNum);
+      }
+    }
+  }
+
+  .List--col-lg-#{$colNum} {
+    .List_Item {
+      @media (min-width: $screen-lg-min) {
+        @include responsive-list-item($colNum);
+      }
+    }
+  }
+}
