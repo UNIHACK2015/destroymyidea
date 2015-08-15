@@ -1,53 +1,61 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="Block-background">
+  <div ng-include="'components/navbar/navbar.html'"></div>
+  <ul>
+  <li><a href="#about">Why?!</a></li>
+  </ul>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Destroy My Idea! <!-- Insert Idea generator here--></h1>
-    <!-- Insert Script to generate idea responces-->
-  </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-
+  <div class="HeaderContent PageBanner">
+    <div class="HeaderContentInner">
+      <form>
+        <div class="form-group">
+          <div class="row">
+            <div class="form-group col-lg-3">
+            </div>
+            <div class="form-group col-lg-6">
+              <input type="text" class="form-control Search--field" id="search" placeholder="">
+            </div>
+            <div class="form-group col-lg-3">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-default Button--search">Destroy My Idea!</button>
+      </form>
     </div>
   </div>
 </div>
-
-<div id="about">
+<div id="about" class="content">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading">Services</h2>
+        <h2 class="section-heading">Why Does this Even Exist?</h2>
+
         <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
       </div>
     </div>
     <div class="row text-center">
       <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <img class="icon" src="/assets/images/icons/business/networking10.png">
+                    <span class="fa-stack fa-5x ">
+                        <Img class="Icon" src="/assets/images/icons/business/feedback11.png">
                     </span>
         <h4 class="service-heading">Instant Feedback</h4>
-        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-          quo inventore harum ex magni, dicta impedit.</p>
+
+        <p class="text-muted">Instantly gain feedback from users across the world. </p>
       </div>
       <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    <span class="fa-stack fa-5x ">
+                       <Img class="Icon" src="/assets/images/icons/business/networking11.png">
                     </span>
         <h4 class="service-heading">Crowd-Sourced Competitor Analysis</h4>
+
         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
           quo inventore harum ex magni, dicta impedit.</p>
       </div>
       <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                    <span class="fa-stack fa-5x ">
+                        <Img class="Icon" src="/assets/images/icons/business/ideas11.png">
                     </span>
         <h4 class="service-heading">Identify Issues</h4>
+
         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
           quo inventore harum ex magni, dicta impedit.</p>
       </div>
@@ -57,6 +65,10 @@
 
 <footer class="footer">
   <div class="container">
-      Copyright (c) 2015 The Iterative blah blah blah
+    <p>Copyright (c) 2015 The Paradoxical Iterators</p>
+    <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
+    <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
+    <p>Built for: UNIHACK 2015</p>
   </div>
 </footer>
+
