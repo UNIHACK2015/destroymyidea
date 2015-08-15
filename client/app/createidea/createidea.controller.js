@@ -4,9 +4,7 @@ angular.module('unihack2015App')
     .controller('CreateideaCtrl', ['$scope', 'Idea', function ($scope, Idea) {
         $scope.message = 'Hello';
 
-        $scope.idea = {
-            images: []
-        };
+        $scope.idea = {};
 
 
         $scope.createIdea = function () {
