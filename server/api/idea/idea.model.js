@@ -6,8 +6,14 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var IdeaSchema = new Schema({
+    user_id: Schema.Types.ObjectId,
     name: String,
-    description: String
+    description: String,
+    rating: {
+      back_it: Number,
+      destroy_it: Number
+    },
+    timestamp: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Idea', IdeaSchema);

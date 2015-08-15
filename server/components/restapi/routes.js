@@ -7,22 +7,20 @@
 var express = require('express');
 var RESTController = require('./controller.js');
 
+module.exports = function(model) {
+    var restRouter = {};
+    var router = express.Router();
+    var controller = new RESTController(model);
 
-module.exports =  class RESTRoutes {
-
-    constructor(model) {
-        this.router = express.Router();
-        this.model = model;
-        this.controller = new RESTController(model);
-    }
-
-    generateRoutes(config) {
+    restRouter.generateRoutes = function(config) {
         config = config || {};
-        if(config.index !== false) this.router.get('/', this.controller.index);
-        if(config.show !== false) this.router.get('/:id', this.controller.show);
-        if(config.update !== false) this.router.put('/:id', this.controller.update);
-        if(config.create !== false) this.router.post('/', this.controller.create);
-        if(config.destroy !== false) this.router.delete(':id/', this.controller.destroy);
-        return this.router;
-    }
+        if(config.index !== false) router.get('/', controller.index);
+        if(config.show !== false) router.get('/:id', controller.show);
+        if(config.update !== false) router.put('/:id', controller.update);
+        if(config.create !== false) router.post('/', controller.create);
+        if(config.destroy !== false) router.delete(':id/', controller.destroy);
+        return router;
+    };
+
+    return restRouter;
 };
