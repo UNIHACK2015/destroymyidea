@@ -2,7 +2,9 @@
 
 angular.module('unihack2015App')
   .controller('UserCtrl', function ($scope) {
-    $scope.user =
+    $scope.user = 
+    // User.get('me');
+    // console.log($scope.user);
     	{
     		'username' : 'TheKiller',
     		'userImgPath' : '../../assets/images/person.png',
