@@ -44,6 +44,42 @@ angular.module('unihack2015App')
 
     var title = "Destroy My Idea!";
 
+    function writeTextBox(someString, someElement) {
+
+      var wait_time = 5000;
+      var removeTimeout = (someString.length * 100) + wait_time;
+
+      writeLetter(someString.split(""));
+      setTimeout(function() { removeLetter(someString); }, removeTimeout);
+
+      var stringValue;
+
+      function writeLetter(stringArray) {
+
+        setTimeout(function() {
+            if(stringArray.length) {
+                stringValue += stringArray.shift();
+                // console.log(stringValue);
+                someElement.setAttribute('placeholder', stringValue);
+                writeLetter(stringArray);
+            }
+        }, 100);
+
+      }
+
+      function removeLetter (stringArray) {
+          
+        setTimeout(function() {
+          if(stringArray.length+1) {
+            someElement.setAttribute('placeholder', stringArray.toString());
+            removeLetter(stringArray.slice(0,stringArray.length-1));
+          }
+        }, 100);
+
+      }
+
+    }
+
     function writeText(someString, someElement) {
 
       // var idea = ideas[0];
@@ -55,7 +91,7 @@ angular.module('unihack2015App')
       // });
 
       var wait_time = 5000;
-      var removeTimeout = someString.length * 100 + wait_time;
+      var removeTimeout = (someString.length * 100) + wait_time;
 
       writeLetter(someString.split(""));
       setTimeout(function() { removeLetter(someString) }, removeTimeout);
@@ -84,7 +120,7 @@ angular.module('unihack2015App')
 
     }
 
-    writeText(title, document.getElementById("search"));
+    writeTextBox(title, document.getElementById("search"));
 
     var commentSection = document.getElementById('commentSection');
 
@@ -112,11 +148,15 @@ angular.module('unihack2015App')
 
       function randomStartWriteText(someString, someElement) {
         startwritingtimeout = Math.ceil((Math.random() * 10000) + 200);
-        console.log(startwritingtimeout);
+        // console.log(startwritingtimeout);
         setTimeout(function () {
           writeText(someString,someElement);
         }, startwritingtimeout);
       }
+
+
+
+
 
 
     }
