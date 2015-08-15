@@ -16,9 +16,6 @@ angular.module('unihack2015App')
                         if (Auth.isLoggedIn()) {
 
                             var index = _.findIndex(Auth.getCurrentUser().votes.ideas, function (check) {
-                                console.log(idea);
-
-                                console.log(check.idea_id + ' vs ' + idea._id);
                                 return check.idea_id == idea._id;
                             });
 
