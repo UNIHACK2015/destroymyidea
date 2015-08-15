@@ -1,0 +1,12 @@
+<div class="Voter">
+    <button class="Voter_Back" ng-class="{selected: voted == 1}" ng-click="upvote()">
+        <i class="fa fa-thumbs-o-up fa-2x"></i>
+
+        <div>{{ idea.rating.back_it }}</div>
+    </button>
+    <button class="Voter_Destroy" ng-class="{selected: voted == -1}" ng-click="downvote()">
+        <i class="fa fa-thumbs-o-down fa-2x"></i>
+
+        <div>{{ idea.rating.destroy_it }}</div>
+    </button>
+</div>
