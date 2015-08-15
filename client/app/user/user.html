@@ -1,0 +1,25 @@
+
+<div class='container'>
+	<div class="col-md-12">
+
+		<div style="height: 200px;">
+			<img ng-src='{{ user.userImgPath }}' style='float: left; width: 250px;'>
+			<div style='margin: 20px;'>
+				<span class='h2'>{{ user.username }}</span>
+				<div class="progress">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+				  aria-valuemin="0" aria-valuemax="100" ng-value='levelPercentage' style="width: {{ user.levelPercentage }}">
+				  </div>
+				</div>
+				<span><span>Level: {{ user.level }}</span><span style="float: right;">{{ user.levelCurrentXp }} / {{ user.levelTotalXp }}</span></span>
+			</div>
+		</div>
+
+		<span ng-repeat='badge in user.badges'>
+			<a href="#" popover-title={{badge.badgeName}} popover={{badge.badgeDescription}} popover-placement='bottom' popover-trigger='mouseenter'>
+				<img ng-src='{{ badge.badgeImgPath }}' style='width: 100px;'>
+			</a>
+		</span>
+
+	</div>
+</div>

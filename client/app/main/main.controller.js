@@ -26,22 +26,6 @@ angular.module('unihack2015App')
       }
     ]
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { title: $scope.ideas[0].title, description: $scope.ideas[0].description });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
     var title = "Destroy My Idea!";
 
     function writeText(someString, someElement) {
