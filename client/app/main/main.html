@@ -1,28 +1,75 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="Block--background">
+    <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+    <div class="HeaderContent PageBanner">
+        <div class="HeaderContentInner">
+            <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="form-group col-lg-3">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" class="form-control Search--field" id="search" placeholder="">
+                        </div>
+                        <div class="form-group col-lg-3">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default Button--search">Destroy My Idea!</button>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
+<div id="about" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Why Does this Even Exist?</h2>
+
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                    <span class="fa-stack fa-5x ">
+                        <Img class="Icon" src="/assets/images/icons/business/feedback11.png">
+                    </span>
+                <h4 class="service-heading">Instant Feedback</h4>
+
+                <p class="text-muted">Instantly gain feedback from users across the world. Discover </p>
+            </div>
+            <div class="col-md-4">
+                    <span class="fa-stack fa-5x ">
+                       <Img class="Icon" src="/assets/images/icons/business/networking11.png">
+                    </span>
+                <h4 class="service-heading">Crowd-Sourced Competitor Analysis</h4>
+
+                <p class="text-muted">Get insight into what competition exists and use this information to calculate
+                    market positioning and strategic management. With wide variety you will be equipped with the
+                    knowledge needed
+                    to position yourself strategically and identify opportunities and potential threats.</p>
+            </div>
+            <div class="col-md-4 ImageIcon">
+                    <span class="fa-stack fa-5x ">
+                        <Img class="ImageIcon_Image" src="/assets/images/icons/business/ideas11.png">
+                    </span>
+                <h4 class="ImageIcon_Heading">Identify Issues</h4>
+
+                <p class="text-muted">Discover problems potentially overlooked by owners or key stakeholders</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.1.1 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
+    <div class="container">
+        <p>Copyright (c) 2015 The Paradoxical Iterators</p>
+
+        <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
+
+        <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
+
+        <p>Built for: UNIHACK 2015</p>
+    </div>
 </footer>
+

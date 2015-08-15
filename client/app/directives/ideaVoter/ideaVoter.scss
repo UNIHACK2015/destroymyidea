@@ -1,0 +1,28 @@
+.Voter {
+  .Voter_Back, .Voter_Destroy {
+    padding: 5px;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .Voter_Back {
+    color: green;
+    &:hover {
+      color: #004400;
+    }
+
+    &.selected {
+      box-shadow: 0px 0px 5px 4px green;
+    }
+  }
+
+  .Voter_Destroy {
+    color: red;
+    &:hover {
+      color: #7a0000;
+    }
+    &.selected {
+      box-shadow: 0px 0px 5px 4px red;
+    }
+  }
+}
