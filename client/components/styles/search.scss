@@ -5,14 +5,30 @@
   font-size: x-large;
 }
 
+.Button{
+  font-size: x-large;
+}
+
+.Button--create{
+  background-color: #327781;
+  border-color: #EEE;
+  color: #EEE;
+}
+
+.Button--create:hover{
+  background-color: #388590;
+  border-color: #EEE;
+  color: #EEE;
+}
+
 .Button--search{
-  background-color: rgba(255, 255, 255, 0.0);
-  border-color: #333;
-  color: #333;
+  background-color: #8A9471;
+  border-color: #EEE;
+  color: #EEE;
 }
 
 .Button--search:hover{
-  background-color: #333;
-  border-color: #333;
+  background-color: #95a07a;
+  border-color: #EEE;
   color: #EEE;
 }
