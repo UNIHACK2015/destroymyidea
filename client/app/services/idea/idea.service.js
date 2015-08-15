@@ -2,7 +2,12 @@
 
 angular.module('unihack2015App')
   .service('Idea', ['$resource', function ($resource) {
-
-        return $resource('/api/ideas');
+        return $resource('/api/ideas/:id', {
+          id: '@_id'
+        }, {
+          update: {
+            method: 'PUT'
+          }
+        });
 
   }]);

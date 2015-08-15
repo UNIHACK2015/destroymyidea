@@ -8,8 +8,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
-  user_id: Schema.Types.ObjectId,
-  idea_id: Schema.Types.ObjectId,
+  user_id: {type: Schema.Types.ObjectId, ref: 'User'},
   criticism: String,
   rating: {
     upvotes: Number,
@@ -18,4 +17,7 @@ var CommentSchema = new Schema({
   timestamp: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('Comment', CommentSchema);
+module.exports = {
+  model: mongoose.model('Comment', CommentSchema),
+  schema: CommentSchema
+};

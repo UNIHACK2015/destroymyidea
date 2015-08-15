@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Idea = require('../api/idea/idea.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -42,6 +43,24 @@ User.find({}).remove(function() {
     name: 'Admin',
     email: 'admin@admin.com',
     password: 'admin'
+  }, function() {
+      console.log('finished populating users');
+    }
+  );
+});
+
+Idea.find({}).remove(function() {
+  Idea.create({
+    name: 'Hello World',
+    description: 'Hello World',
+      comments: [{
+        criticism: 'You suck'
+      }, {
+        criticism: 'Yay'
+      }]
+  }, {
+    name: 'Hello WwwWWW',
+    description: 'WWWWWW'
   }, function() {
       console.log('finished populating users');
     }

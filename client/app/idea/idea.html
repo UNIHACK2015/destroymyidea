@@ -10,15 +10,31 @@
         {{ idea.description }}
       </div>
     </div>
-    <hr/>
   </div>
   <div class="row">
+    <form ng-submit="postComment()" method="post">
+      <div class="col-md-11">
+        <input class="form-control" type="text" ng-model="comment"/>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Criticize</button>
+      </div>
+    </form>
+  </div>
+  <br/>
+
+  <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default" ng-repeat="comment in comments">
-          <div class="panel-body">
-              {{ comment.criticism }}
-          </div>
+      <h3>What other people are saying...</h3>
+
+      <div class="panel panel-default" ng-repeat="comment in idea.comments">
+        <div class="panel-body">
+          {{ comment.criticism }}
         </div>
+        <div class="panel-footer">
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

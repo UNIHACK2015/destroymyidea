@@ -15,15 +15,15 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
 
-  active_badge: Schema.Types.ObjectId,
+  active_badge: {type: Schema.Types.ObjectId, ref: 'Badge'},
   points: Number,
-  badges: [Schema.Types.ObjectId],
+  badges: [{type: Schema.Types.ObjectId, ref: 'Badge'}],
   votes: {
     ideas: [{
-      idea_id: Schema.Types.ObjectId, vote: Number
+      idea_id: {type: Schema.Types.ObjectId, ref: 'Idea'}, vote: Number
     }],
     comments: [{
-      comment_id: Schema.Types.ObjectId, vote: Number
+      comment_id: {type: Schema.Types.ObjectId, ref: 'Comment'}, vote: Number
     }]
   }
 });
