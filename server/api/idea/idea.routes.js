@@ -42,10 +42,10 @@ routes.get('/', function (req, res) {
 
         }
         query = query.sort(sort);
-        query = pager(req, query);
     } else {
         console.log('not sorting');
     }
+    query = pager(req, query);
 
     query.exec(function (err, items) {
         if (err) {
@@ -89,14 +89,17 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
             var foundComment = req.user.votes.ideas[foundCommentIndex];
 
             if (foundComment.vote == 0) {
+                /* Comment had no original vote */
                 if (req.body.change > 0) backit = 1;
                 else destroyit = 1;
-            } else if (foundComment.vote == 1) {
-                backit = -1;
-                destroyit = req.body.change == -1 ? 1 : 0;
-            } else if (foundComment.vote == -1) {
-                backit = req.body.change == 1 ? 1 : 0;
-                destroyit = -1;
+            } else if (req.body.change == 1) {
+                /* User has selected upvote */
+                backit = foundComment.vote == 1 ? -1 : 1;
+                destroyit = foundComment.vote == -1 ? -1 : 0;
+            } else if (req.body.change == -1) {
+                /* User has selected downvote */
+                backit = foundComment.vote == 1 ? -1 : 0;
+                destroyit = foundComment.vote == -1 ? -1 : 1;
             }
             req.user.votes.ideas[foundCommentIndex].vote = req.body.change == foundComment.vote ? 0 : req.body.change;
         } else {
@@ -104,13 +107,20 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
                 idea_id: req.params.id,
                 vote: req.body.change
             });
-            if (req.body.change) backit += 1;
-            else destroyit += 1;
+            if (req.body.change === 1) {
+                backit += 1;
+            }  else if (req.body.change === -1) {
+                destroyit += 1;
+            }
         }
         req.user.save();
 
+        console.log('back it ' + backit);
+        console.log('destroy it ' + destroyit);
+
         idea.rating.back_it += backit;
         idea.rating.destroy_it += destroyit;
+        console.log(req.body);
 
 
         idea.save(function (err, item) {
