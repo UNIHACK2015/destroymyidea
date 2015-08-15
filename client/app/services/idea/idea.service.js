@@ -11,7 +11,11 @@ angular.module('unihack2015App')
             vote: {
                 method: 'PUT',
                 url: '/api/ideas/:id/vote'
-            }
+            },
+          commentVote: {
+            method: 'PUT',
+            url: '/api/ideas/:ideaId/comments/:commentId/vote'
+          }
         });
 
   }]);

@@ -6,6 +6,7 @@ var RESTRouter = require('./../../components/restapi/routes.js');
 var IdeaModel = require('./idea.model.js');
 var auth = require('./../../auth/auth.service');
 var _ = require('lodash');
+var User = require('../user/user.controller.js');
 
 var ideaRoutes = new RESTRouter(IdeaModel);
 var routes = ideaRoutes.generateRoutes({index: false, show: false});
@@ -89,6 +90,63 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
             return res.status(200).json(item);
         });
     });
+});
+
+routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function(req, res) {
+  IdeaModel.findById(req.params.ideaId, function(err, idea) {
+    var change = req.body.change;
+
+    var backit = 0;
+    var destroyit = 0;
+
+    if (err) {
+      return handleError(res, err);
+    }
+
+    // find comment
+    var foundCommentIndex = _.findIndex(req.user.votes.comments, function (comment) {
+      return comment.comment_id == req.params.commentId;
+    });
+
+    if(foundCommentIndex >= 0) {
+      console.log('index: '+foundCommentIndex);
+      var comment = req.user.votes.comments[foundCommentIndex];
+
+      // Updating existing vote
+      if(comment.vote == 0) {
+        if(change > 0) backit = 1;
+        else destroyit = 1;
+      } else if (comment.vote == 1) {
+        backit = -1;
+        destroyit = change == -1 ? 1 : 0;
+      } else if (comment.vote == -1) {
+        backit = change == 1 ? 1 : 0;
+        destroyit = -1;
+      }
+      req.user.votes.comments[foundCommentIndex].vote = (change == comment.vote) ? 0 : change;
+    } else {
+      req.user.votes.comments.push({
+        comment_id: req.params.commentId,
+        vote: change
+      });
+      if(change) backit += 1;
+      else destroyit+=1;
+    }
+    req.user.save();
+
+    var ideaCommIndex = _.findIndex(idea.comments, function(comments) {
+      return comments._id == req.params.commentId;
+    });
+    idea.comments[ideaCommIndex].rating.upvotes += backit;
+    idea.comments[ideaCommIndex].rating.downvotes += destroyit;
+
+    idea.save(function (err, item) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.status(200).json(item);
+    });
+  });
 });
 
 module.exports = routes;

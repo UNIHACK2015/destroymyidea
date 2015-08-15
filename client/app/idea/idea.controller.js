@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('unihack2015App')
-  .controller('IdeaCtrl', function ($scope, Idea, $state, Auth, User) {
+  .controller('IdeaCtrl', function ($scope, Idea, $state, Auth) {
     $scope.comment = '';
 
     $scope.isLoggedIn = function () {
@@ -26,32 +26,44 @@ angular.module('unihack2015App')
 
     $scope.upvoteComment = function (commentId) {
       var user = Auth.getCurrentUser();
-      var res = User.hasVoted({id: user._id}, {obj_id: commentId});
-      if (!res.voted) {
-        // add upvote
-        $scope.idea.comments.forEach(function (comment, i) {
-          if (comment._id == commentId) {
-            $scope.idea.comments[i].rating.upvotes++;
-            Idea.update({id: $state.params.id}, $scope.idea);
+      $scope.idea.comments.forEach(function (comment, i) {
+        if (comment._id == commentId) {
+          for(var j=0; j<user.votes.comments.length; j++) {
+            if(user.votes.comments[j].comment_id == commentId) {
+              var cmt = user.votes.comments[j];
+              break;
+            }
           }
-        });
-        // add comment to user's voted list
-      }
+
+          (cmt.vote == 1) ? $scope.idea.comments[i].rating.upvotes-- : $scope.idea.comments[i].rating.upvotes++;
+          if (cmt.vote == -1) {
+            $scope.idea.comments[i].rating.downvotes--;
+          }
+          (cmt.vote == 1) ? cmt.vote-- : cmt.vote = 1;
+        }
+      });
+      Idea.commentVote({ideaId: $state.params.id, commentId: commentId}, {change: 1});
     };
 
     $scope.downvoteComment = function (commentId) {
       var user = Auth.getCurrentUser();
-      var res = User.hasVoted({id: user._id}, {obj_id: commentId});
-      if (!res.voted) {
-        // add upvote
-        $scope.idea.comments.forEach(function (comment, i) {
-          if (comment._id == commentId) {
-            $scope.idea.comments[i].rating.downvotes++;
-            Idea.update({id: $state.params.id}, $scope.idea);
+      $scope.idea.comments.forEach(function (comment, i) {
+        if (comment._id == commentId) {
+          for(var j=0; j<user.votes.comments.length; j++) {
+            if(user.votes.comments[j].comment_id == commentId) {
+              var cmt = user.votes.comments[j];
+              break;
+            }
           }
-        });
-        // add comment to user's voted list
-      }
+
+          (cmt.vote == -1) ? $scope.idea.comments[i].rating.downvotes-- : $scope.idea.comments[i].rating.downvotes++;
+          if (cmt.vote == 1) {
+            $scope.idea.comments[i].rating.upvotes--;
+          }
+          (cmt.vote == -1) ? cmt.vote++ : cmt.vote = -1;
+        }
+      });
+      Idea.commentVote({ideaId: $state.params.id, commentId: commentId}, {change: -1});
     };
 
     $scope.refreshIdea();
