@@ -21,6 +21,10 @@ angular.module('unihack2015App')
           id:'me'
         }
       },
+      getByUName: {
+        method: 'GET',
+        url: '/api/users/uname/:username'
+      },
       hasVoted: {
         method: 'POST',
         params: {

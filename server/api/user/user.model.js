@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Badge = require('../badge/badge.model.js');
 var crypto = require('crypto');
 
 var UserSchema = new Schema({
@@ -17,7 +18,7 @@ var UserSchema = new Schema({
 
   active_badge: {type: Schema.Types.ObjectId, ref: 'Badge'},
   points: Number,
-  badges: [{type: Schema.Types.ObjectId, ref: 'Badge'}],
+  badges: [ Badge.schema ],
   votes: {
     ideas: [{
       idea_id: {type: Schema.Types.ObjectId, ref: 'Idea'},
