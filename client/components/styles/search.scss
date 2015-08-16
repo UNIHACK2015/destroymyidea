@@ -7,28 +7,29 @@
 
 .Button{
   font-size: x-large;
+  width:250px
 }
 
 .Button--create{
   background-color: #327781;
-  border-color: #EEE;
+  border-color: #2d6c75;
   color: #EEE;
 }
 
 .Button--create:hover{
-  background-color: #388590;
-  border-color: #EEE;
+  background-color: #2d6c75;
+  border-color: #2d6c75;
   color: #EEE;
 }
 
 .Button--search{
   background-color: #8A9471;
-  border-color: #EEE;
+  border-color: #7b8465;
   color: #EEE;
 }
 
 .Button--search:hover{
-  background-color: #95a07a;
-  border-color: #EEE;
+  background-color: #7b8465;
+  border-color: #7b8465;
   color: #EEE;
 }
