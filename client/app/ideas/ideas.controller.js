@@ -7,12 +7,10 @@ angular.module('unihack2015App')
         $scope.ideas = Idea.query(function (items) {
             newest = items;
             $scope.ideas = items;
-            updateGrid();
         });
 
         $scope.updateList = function (newIdea) {
             $scope.ideas.unshift(newIdea);
-            updateGrid();
         };
 
         $scope.searchText = '';
@@ -33,11 +31,15 @@ angular.module('unihack2015App')
                 $scope.ideas = newest;
                 updateGrid();
             } else {
-                Idea.search({title: $scope.searchText}, function (ideas) {
+                Idea.query({title: $scope.searchText}, function (ideas) {
                     $scope.ideas = ideas;
-                    updateGrid();
                 });
             }
+        }
 
+        $scope.sort = function (method) {
+            Idea.query({sort: method}, function (ideas) {
+                $scope.ideas = ideas;
+            });
         }
     }]);

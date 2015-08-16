@@ -15,13 +15,14 @@ angular.module('unihack2015App')
                     if (idea) {
                         if (Auth.isLoggedIn()) {
 
-                            var index = _.findIndex(Auth.getCurrentUser().votes.ideas, function (check) {
+                            var ideas = Auth.getCurrentUser().votes.ideas;
+
+                            var index = _.findIndex(ideas, function (check) {
                                 return check.idea_id == idea._id;
                             });
 
-
                             if (index > -1) {
-                                scope.voted = Auth.getCurrentUser().votes.ideas[index].vote;
+                                scope.voted = ideas[index].vote;
                             }
                         }
 
@@ -36,7 +37,9 @@ angular.module('unihack2015App')
 
                     scope.voted = (scope.voted === 1) ? 0 : 1;
                     scope.idea.rating.back_it += (scope.voted === 1) ? 1 : -1;
-                    Idea.vote({id: scope.idea._id}, {change: 1});
+                    Idea.vote({id: scope.idea._id}, {change: 1}, function (data) {
+                        Auth.updateCurrentUser();
+                    });
                 };
                 scope.downvote = function () {
                     scope.idea.rating.back_it += scope.voted === 1 ? -1 : 0;
