@@ -6,12 +6,13 @@
   color: #000;
   display: block;
   border-radius: 5px;
-  border: 1px solid black;
+  overflow: hidden;
 }
 
 .Card--link {
   color: #000;
   text-decoration: none;
+  display: block;
 
   &:hover {
     box-shadow: 0px 0px 15px 2px #ddd;
