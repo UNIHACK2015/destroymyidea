@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var BadgeSchema = new Schema({
+  id: Number,
   name: String,
   short_desc: String,
   points: Number,
@@ -18,4 +19,7 @@ var BadgeSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('Badge', BadgeSchema);
+module.exports = { 
+	model: mongoose.model('Badge', BadgeSchema),
+	schema: BadgeSchema
+}
