@@ -13,9 +13,7 @@
     }
 
     &.selected {
-      box-shadow: 0px 0px 5px 4px green;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: orange;
+      color: #004400;
     }
   }
 
@@ -25,7 +23,7 @@
       color: #7a0000;
     }
     &.selected {
-      box-shadow: 0px 0px 5px 4px red;
+      color: #7a0000;
     }
   }
 }
