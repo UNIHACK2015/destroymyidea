@@ -15,11 +15,13 @@ var BadgeSchema = new Schema({
   tasks: [{
     task_name: String,
     task_logic: String
-  }]
+  }],
+  imgPath: String,
+  achieved: {type: Boolean, default: false}
 
 });
 
-module.exports = { 
+module.exports = {
 	model: mongoose.model('Badge', BadgeSchema),
 	schema: BadgeSchema
 }
