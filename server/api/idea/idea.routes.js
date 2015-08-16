@@ -61,6 +61,7 @@ routes.get('/', function (req, res) {
         console.log('not sorting');
     }
     query = pager(req, query);
+    query = query.populate('user_id', 'username').populate('comments comments.replies.user_id');
 
     query.exec(function (err, items) {
         if (err) {

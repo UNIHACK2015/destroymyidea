@@ -31,6 +31,7 @@ angular.module('unihack2015App')
                     Idea.save(toSubmit, function (success) {
                         scope.status = 'success';
                         scope.successes = ['Thanks for your idea! Get ready to have it destroyed >:D'];
+                        success.user_id = Auth.getCurrentUser();
                         scope.update({'newIdea': success});
                     });
                 }
