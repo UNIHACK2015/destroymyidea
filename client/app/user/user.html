@@ -15,12 +15,12 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-md-12">
 			<h2>Badges</h2>
 			<span ng-repeat='badge in user.badges'>
-				<img popover-title={{badge.name}} popover='The end is nigh.' popover-placement='bottom' popover-trigger='mouseenter' ng-src='{{ user.userImgPath }}' style='width: 100px;'>
+				<img popover-title={{badge.name}} popover='{{badge.short_desc}}' popover-placement='bottom' popover-trigger='mouseenter' ng-src='{{ badge.imgPath }}' style='width: 100px;'>
 			</span>
 		</div>
 	</div>

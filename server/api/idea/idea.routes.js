@@ -10,10 +10,10 @@ var User = require('../user/user.controller.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var ideaRoutes = new RESTRouter(IdeaModel);
-var routes = ideaRoutes.generateRoutes({index: false, show: false});
+var routes = ideaRoutes.generateRoutes({index: false, show: false, create: false});
 
 function handleError(res, err) {
-  return res.status(500).send(err);
+    return res.status(500).send(err);
 };
 
 routes.get('/search', function (req, res) {
@@ -60,57 +60,58 @@ routes.get('/', function (req, res) {
     } else {
         console.log('not sorting');
     }
+
+    query = pager(req, query);
+
     query = pager(req, query);
     query = query.populate('user_id', 'username').populate('comments comments.replies.user_id');
 
-  query = pager(req, query);
-
-  if (req.query.page) {
-    var perPage = 10;
-    var offset = req.query.page * perPage;
-    query.skip(offset).limit(perPage);
-  }
-
-  query.exec(function (err, items) {
-    if (err) {
-      return handleError(res, err);
+    if (req.query.page) {
+        var perPage = 10;
+        var offset = req.query.page * perPage;
+        query.skip(offset).limit(perPage);
     }
-    return res.status(200).json(items);
-  });
+
+    query.exec(function (err, items) {
+        if (err) {
+            return handleError(res, err);
+        }
+        return res.status(200).json(items);
+    });
 });
 
 routes.get('/:id', function (req, res) {
-  IdeaModel.findById(req.params.id).populate('user_id comments comments.replies.user_id')
-    .populate('comments.user_id', 'username').exec(function (err, item) {
-      if (err) {
-        return handleError(res, err);
-      }
-      if (!item) {
-        return res.status(404).send('Not Found');
-      }
-      return res.json(item);
-    });
+    IdeaModel.findById(req.params.id).populate('user_id comments comments.replies.user_id')
+        .populate('comments.user_id', 'username').exec(function (err, item) {
+            if (err) {
+                return handleError(res, err);
+            }
+            if (!item) {
+                return res.status(404).send('Not Found');
+            }
+            return res.json(item);
+        });
 });
 
 routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
-  IdeaModel.findById(req.params.id, function (err, idea) {
-    if (err) {
-      return handleError(res, err);
-    }
+    IdeaModel.findById(req.params.id, function (err, idea) {
+        if (err) {
+            return handleError(res, err);
+        }
 
-    var foundCommentIndex = _.findIndex(req.user.votes.ideas, function (idea) {
-      return idea.idea_id == req.params.id;
-    });
+        var foundCommentIndex = _.findIndex(req.user.votes.ideas, function (idea) {
+            return idea.idea_id == req.params.id;
+        });
 
-    var newRating = 0;
+        var newRating = 0;
 
-    var backit = 0;
-    var destroyit = 0;
+        var backit = 0;
+        var destroyit = 0;
 
 
-    if (foundCommentIndex > -1) {
-      // Updating existing vote
-      var foundComment = req.user.votes.ideas[foundCommentIndex];
+        if (foundCommentIndex > -1) {
+            // Updating existing vote
+            var foundComment = req.user.votes.ideas[foundCommentIndex];
             if (foundComment.vote == 0) {
                 /* Comment had no original vote */
                 if (req.body.change > 0) backit = 1;
@@ -145,84 +146,95 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
         idea.rating.destroy_it += destroyit;
         console.log(req.body);
 
-    // add/remove from user points
-    idea.user_id.points += backit;
-    idea.user_id.points -= destroyit;
+        // add/remove from user points
+        // idea.user_id.points += backit;
+        // idea.user_id.points -= destroyit;
 
-    idea.save(function (err, item) {
-      if (err) {
-        return handleError(res, err);
-      }
-      return res.status(200).json(item);
+        idea.save(function (err, item) {
+            if (err) {
+                return handleError(res, err);
+            }
+            return res.status(200).json(item);
+        });
+
     });
-
-  });
 });
 
 routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function (req, res) {
-  IdeaModel.findById(req.params.ideaId, function (err, idea) {
-    var change = req.body.change;
+    IdeaModel.findById(req.params.ideaId, function (err, idea) {
+        var change = req.body.change;
 
-    var backit = 0;
-    var destroyit = 0;
+        var backit = 0;
+        var destroyit = 0;
 
-    if (err) {
-      return handleError(res, err);
-    }
+        if (err) {
+            return handleError(res, err);
+        }
 
-    // find comment
-    var foundCommentIndex = _.findIndex(req.user.votes.comments, function (comment) {
-      return comment.comment_id == req.params.commentId;
+        // find comment
+        var foundCommentIndex = _.findIndex(req.user.votes.comments, function (comment) {
+            return comment.comment_id == req.params.commentId;
+        });
+
+        if (foundCommentIndex >= 0) {
+            console.log('index: ' + foundCommentIndex);
+            var comment = req.user.votes.comments[foundCommentIndex];
+
+            // Updating existing vote
+            if (comment.vote == 0) {
+                if (change > 0) backit = 1;
+                else destroyit = 1;
+            } else if (comment.vote == 1) {
+                backit = -1;
+                destroyit = change == -1 ? 1 : 0;
+            } else if (comment.vote == -1) {
+                backit = change == 1 ? 1 : 0;
+                destroyit = -1;
+            }
+            req.user.votes.comments[foundCommentIndex].vote = (change == comment.vote) ? 0 : change;
+        } else {
+            req.user.votes.comments.push({
+                comment_id: req.params.commentId,
+                vote: change
+            });
+            if (change) backit += 1;
+            else destroyit += 1;
+
+        }
+        req.user.save();
+
+        var ideaCommIndex = _.findIndex(idea.comments, function (comments) {
+            return comments._id == req.params.commentId;
+        });
+
+        if (idea.comments[ideaCommIndex]) {
+            idea.comments[ideaCommIndex].rating.upvotes += backit;
+            idea.comments[ideaCommIndex].rating.downvotes += destroyit;
+        }
+
+        // add/remove from user points
+        //idea.user_id.points += backit;
+        //idea.user_id.points -= destroyit;
+
+        idea.save(function (err, item) {
+            if (err) {
+                return handleError(res, err);
+            }
+            return res.status(200).json(item);
+        });
+
     });
+});
 
-    if (foundCommentIndex >= 0) {
-      console.log('index: ' + foundCommentIndex);
-      var comment = req.user.votes.comments[foundCommentIndex];
-
-      // Updating existing vote
-      if (comment.vote == 0) {
-        if (change > 0) backit = 1;
-        else destroyit = 1;
-      } else if (comment.vote == 1) {
-        backit = -1;
-        destroyit = change == -1 ? 1 : 0;
-      } else if (comment.vote == -1) {
-        backit = change == 1 ? 1 : 0;
-        destroyit = -1;
-      }
-      req.user.votes.comments[foundCommentIndex].vote = (change == comment.vote) ? 0 : change;
-    } else {
-      req.user.votes.comments.push({
-        comment_id: req.params.commentId,
-        vote: change
-      });
-      if (change) backit += 1;
-      else destroyit += 1;
-
-    }
-    req.user.save();
-
-    var ideaCommIndex = _.findIndex(idea.comments, function (comments) {
-      return comments._id == req.params.commentId;
+routes.post('/',  auth.isAuthenticated(), function (req, res) {
+    req.body.user_id = new ObjectId(req.user.user_id);
+    console.log(req.body.user_id);
+    IdeaModel.create(req.body, function (err, item) {
+        if (err) {
+            return handleError(res, err);
+        }
+        return res.status(201).json(item);
     });
-
-    if (idea.comments[ideaCommIndex]) {
-      idea.comments[ideaCommIndex].rating.upvotes += backit;
-      idea.comments[ideaCommIndex].rating.downvotes += destroyit;
-    }
-
-    // add/remove from user points
-    //idea.user_id.points += backit;
-    //idea.user_id.points -= destroyit;
-
-    idea.save(function (err, item) {
-      if (err) {
-        return handleError(res, err);
-      }
-      return res.status(200).json(item);
-    });
-
-  });
 });
 
 module.exports = routes;

@@ -39,9 +39,14 @@ User.find({}).remove(function () {
       email: 'test@test.com',
       password: 'test',
       points: '500',
-      badges: [{'id':'020','name': 'The Destroyer of Worlds'},
-      {'id':'030','name': 'The Destroyer of Universes'},
-      {'id':'015','name': 'The Destroyer of Dreams'}]
+      badges: [{'id':'020','name': 'The Destroyer of Ideas', short_desc: 'Destroy 10 ideas.', imgPath: '/assets/images/badges/ideas.png', achieved: true},
+      {'id':'030','name': 'The Destroyer of Dreams', short_desc: 'Destroy 50 ideas.', imgPath: '/assets/images/badges/dreams.png', achieved: true},
+      {'id':'015','name': 'The Destroyer of Being', short_desc: '[LOCKED] Destroy 100 ideas.', imgPath: '/assets/images/badges/being.png'},
+      {'id':'015','name': 'The Destroyer of Worlds', short_desc: '[LOCKED] Destroy 200 ideas.', imgPath: '/assets/images/badges/worlds.png'},
+      {'id':'015','name': 'The Destroyer of Comprehension', short_desc: '[LOCKED] Destroy 300 ideas', imgPath: '/assets/images/badges/comprehension.png'},
+      {'id':'015','name': 'The Destroyer of Countiousness', short_desc: '[LOCKED] Destroy 400 ideas.', imgPath: '/assets/images/badges/countiousness.png'},
+      {'id':'015','name': 'The Destroyer of Universes', short_desc: '[LOCKED] Destroy 500 ideas.', imgPath: '/assets/images/badges/universes.png'},
+      {'id':'015','name': 'The Destroyer of Galaxies', short_desc: '[LOCKED] Destroy 800 ideas.', imgPath: '/assets/images/badges/galaxies.png'}]
     }, {
       provider: 'local',
       role: 'admin',
