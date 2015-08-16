@@ -22,7 +22,10 @@
               </div>
             </div>
           </div>
-          <a href="#register" class="btn btn-default Button Button--create">Destroy My
+          <a ng-hide="isLoggedIn()" href="#register" class="btn btn-default Button Button--create page-scroll">Destroy My
+            Idea!
+          </a>
+          <a ng-hide="!isLoggedIn()" ng-click="createIdea(user.newIdea)" class="btn btn-default Button Button--create page-scroll">Destroy My
             Idea!
           </a>
           <button ui-sref="ideas({title: user.newIdea})" class="btn btn-default Button Button--search">Search

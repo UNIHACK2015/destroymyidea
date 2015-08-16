@@ -22,6 +22,7 @@ angular.module('unihack2015App')
         Idea.save({name: newIdea, user_id: Auth.getCurrentUser()._id}, function (item) {
           $scope.createState = 'created';
           createdIdea = item;
+          $location.path('/ideas/' + item._id);
         });
       }
     };
