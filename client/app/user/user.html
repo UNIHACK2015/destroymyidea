@@ -1,6 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class='container'>
+<<<<<<< HEAD
 	<div class="col-md-12">
 		<div style="height: 200px;">
 			<img ng-src='{{ user.userImgPath }}' style='float: left; width: 150px; margin: 20px;'>
@@ -21,45 +22,81 @@
 			<h2>Badges</h2>
 			<span ng-repeat='badge in user.badges'>
 				<img popover-title={{badge.name}} popover='{{badge.short_desc}}' popover-placement='bottom' popover-trigger='mouseenter' ng-src='{{ badge.imgPath }}' style='width: 100px;'>
+=======
+  <div class="col-md-12">
+    <div style="height: 200px;">
+      <img ng-src='{{ user.userImgPath }}' style='float: left; width: 150px; margin: 20px;'>
+
+      <div style='padding: 20px;'>
+        <span class='h2'>{{ user.username }}</span>
+
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="70"
+               aria-valuemin="0" aria-valuemax="100" ng-value='levelPercentage'
+               style="width: {{ user.levelPercentage }}">
+          </div>
+        </div>
+        <span><span>Level: {{ user.level }}</span><span style="float: right;">{{ user.levelCurrentXp }} / {{ user.levelTotalXp }}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Badges</h2>
+			<span ng-repeat='badge in user.badges'>
+				<img popover-title={{badge.name}} popover='The end is nigh.' popover-placement='bottom'
+             popover-trigger='mouseenter' ng-src='{{ user.userImgPath }}' style='width: 100px;'>
+>>>>>>> 417f5772a22596e69c697c3790d2f7e5bc536423
 			</span>
-		</div>
-	</div>
+    </div>
+  </div>
 
-	<br/>
-	<br/>
+  <br/>
+  <br/>
 
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Ideas</h2>
-            <div class="List List--col-md-3  List--col-sm-2 List--col-xs-1">
-                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
-            </div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Ideas</h2>
 
-	<br/>
-	<br/>
+      <div class="List List--col-md-3  List--col-sm-2 List--col-xs-1">
+        <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+      </div>
+    </div>
+  </div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Comments</h2>
-			<div>
-				<h3></h3>
-				<p><p>
-			</div>
-		</div>
-	</div>
+  <br/>
+  <br/>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Comments</h2>
+
+      <div>
+        <h3></h3>
+
+        <p>
+
+        <p>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p>Copyright (c) 2015 The Paradoxical Iterators</p>
+  <div class="container">
+    <p>Copyright (c) 2015 The Paradoxical Iterators</p>
 
-        <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
+    <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
 
-        <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
+    <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
 
+<<<<<<< HEAD
         <p>Built for: UNIHACK 2015</p>
     </div>
+=======
+    <p>Built for: UNIHACK 2015</p>
+  </div>
+>>>>>>> 417f5772a22596e69c697c3790d2f7e5bc536423
 </footer>

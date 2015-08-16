@@ -228,7 +228,6 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
 
 routes.post('/',  auth.isAuthenticated(), function (req, res) {
     req.body.user_id = new ObjectId(req.user.user_id);
-    console.log(req.body.user_id);
     IdeaModel.create(req.body, function (err, item) {
         if (err) {
             return handleError(res, err);
