@@ -48,8 +48,10 @@ angular.module('unihack2015App')
 
         setTimeout(function() {
             if(stringArray.length) {
-                someElement.innerHTML += stringArray.shift();
-                writeLetter(stringArray);
+                if(someElement) {
+                    someElement.innerHTML += stringArray.shift();
+                    writeLetter(stringArray);
+                }
             }
         }, 100);
 
@@ -105,7 +107,7 @@ angular.module('unihack2015App')
 
     }
 
-    showSomeComments();
+    // showSomeComments();
 
 
 
