@@ -10,15 +10,27 @@ angular.module('unihack2015App')
 
       Idea.query({user_id: user._id}, function (users) {
         $scope.ideas = [{
+          user_id: {
+            username: 'testuser'
+          },
           name: 'Hello world',
           description: 'WWWWWW'
         }, {
+          user_id: {
+            username: 'testuser'
+          },
           name: 'Hello WwwWWW',
           description: 'WWWWWW'
         }, {
+          user_id: {
+            username: 'testuser'
+          },
           name: 'Hello WwwWWW',
           description: 'WWWWWW'
         }, {
+          user_id: {
+            username: 'testuser'
+          },
           name: 'Hello WwwWWW',
           description: 'WWWWWW'
         }];
