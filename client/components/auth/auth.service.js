@@ -22,7 +22,7 @@ angular.module('unihack2015App')
         var deferred = $q.defer();
 
         $http.post('/auth/local', {
-          email: user.email,
+          username: user.username,
           password: user.password
         }).
         success(function(data) {

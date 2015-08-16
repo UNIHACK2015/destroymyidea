@@ -3,10 +3,6 @@
 
   <div class="HeaderContent PageBanner">
     <div class="HeaderContentInner">
-      <div ng-if="createState == 'created'">
-        <h2 style="color: green;">Your idea has been created! Get ready for it to be destroyed!</h2>
-        <button class="btn btn-primary" ng-click="goToNew()">See your idea</button>
-      </div>
       <div ng-if="createState == 'creating'">
         <form>
           <div class="form-group">
@@ -19,17 +15,17 @@
               <div class="form-group col-lg-3">
               </div>
               <div class="form-group col-lg-6">
-                <input type="text" ng-model="newIdea" class="form-control Search--field" id="search"
+                <input type="text" ng-model="user.newIdea" class="form-control Search--field" id="search"
                        placeholder="">
               </div>
               <div class="form-group col-lg-3">
               </div>
             </div>
           </div>
-          <button type="submit" ng-click="createIdea(newIdea)" class="btn btn-default Button Button--create">Destroy My
+          <a href="#register" class="btn btn-default Button Button--create">Destroy My
             Idea!
-          </button>
-          <button type="submit" ng-click="createIdea(newIdea)" class="btn btn-default Button Button--search">Search
+          </a>
+          <button ui-sref="ideas({title: user.newIdea})" class="btn btn-default Button Button--search">Search
             Similar
           </button>
         </form>
@@ -38,61 +34,64 @@
   </div>
 </div>
 
-<div id="register" style="margin-top: 150px; margin-bottom: 150px;">
+<div id="register" style="margin-top: 150px; margin-bottom: 150px;" ng-hide="isLoggedIn()">
   <div class="container-fluid">
     <section class="container">
       <div class="container-page">
         <div class="col-md-6">
           <h3 class="dark-grey">Registration</h3>
 
-          <div class="form-group col-lg-12">
-            <label>Username</label>
-            <input type="" name="" class="form-control" id="" value="">
-          </div>
+          <form name="register" ng-submit="registerUser(register)">
+            <div class="form-group col-lg-12">
+              <label>Username</label>
+              <input type="text" name="username" class="form-control" ng-model="user.username">
+            </div>
 
-          <div class="form-group col-lg-6">
-            <label>Password</label>
-            <input type="password" name="" class="form-control" id="" value="">
-          </div>
+            <div class="form-group col-lg-6">
+              <label>Password</label>
+              <input type="password" name="password" class="form-control" ng-model="user.password">
+            </div>
 
-          <div class="form-group col-lg-6">
-            <label>Repeat Password</label>
-            <input type="password" name="" class="form-control" id="" value="">
-          </div>
+            <div class="form-group col-lg-6">
+              <label>Repeat Password</label>
+              <input type="password" name="repeat_pw" class="form-control">
+            </div>
 
-          <div class="form-group col-lg-12">
-            <label>Email Address</label>
-            <input type="" name="" class="form-control" id="" value="">
-          </div>
+            <div class="form-group col-lg-12">
+              <label>Email Address</label>
+              <input type="email" name="email" class="form-control" ng-model="user.email">
+            </div>
 
-          <div class="checkbox">
-            <label style="margin-left: 15px;">
-              <input type="checkbox"> I agree to the Terms of Usage
-            </label>
-          </div>
+            <div class="checkbox">
+              <label style="margin-left: 15px;">
+                <input type="checkbox"> I agree to the Terms of Usage
+              </label>
+            </div>
 
-          <div class="form-group col-lg-6">
-            <button type="submit" class="btn btn-primary Button--register" style="margin-left: 80%;">Register</button>
-          </div>
+            <div class="form-group col-lg-6">
+              <button type="submit" class="btn btn-primary Button--register" style="margin-left: 80%;">Register</button>
+            </div>
+          </form>
         </div>
 
         <div class="col-md-6">
+          <form ng-submit="loginUser()">
           <h3 class="dark-grey">Login</h3>
 
           <div class="form-group col-lg-12">
             <label>Username</label>
-            <input type="" name="" class="form-control" id="" value="">
+            <input type="text" name="username" class="form-control" ng-model="user.username">
           </div>
 
           <div class="form-group col-lg-12">
             <label>Password</label>
-            <input type="password" name="" class="form-control" id="" value="">
+            <input type="password" name="password" class="form-control" ng-model="user.password">
           </div>
 
           <div class="form-group col-lg-6">
             <button type="submit" class="btn btn-primary Button--register" style="margin-left: 90%;">Login</button>
           </div>
-
+          </form>
         </div>
       </div>
     </section>

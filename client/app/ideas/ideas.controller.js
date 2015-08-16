@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('unihack2015App')
-  .controller('IdeasCtrl', ['$scope', 'Idea', function ($scope, Idea) {
+  .controller('IdeasCtrl', ['$scope', 'Idea', '$stateParams', function ($scope, Idea, $stateParams) {
     var newest = [];
     var currPage = 0;
 
@@ -90,6 +90,15 @@ angular.module('unihack2015App')
         $scope.ideas = $scope.ideas.concat(ideas);
         currPage++;
       });
+    };
+
+    /**
+     * If search term exists from main page
+     */
+    if($stateParams.title) {
+      $scope.searchText = $stateParams.title;
+      $scope.search();
     }
+
   }]);
 
