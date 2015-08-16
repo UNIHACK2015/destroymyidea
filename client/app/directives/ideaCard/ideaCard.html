@@ -1,9 +1,9 @@
 <div class="IdeaCard">
-    <a ui-sref="idea({id: idea._id})" class="Card Card--link">
-        <h3>{{ idea.name }}</h3>
-        Testing
-        <p>{{ idea.description }}</p>
-    </a>
+  <a ui-sref="idea({id: idea._id})" class="Card Card--link">
+    <h3>{{ idea.name }}</h3>
+    Testing
+    <p>{{ idea.description }}</p>
+  </a>
 
     <div class="IdeaCard_VoteRow">
         <a ui-sref="user({userid: idea.user_id.username})">{{ idea.user_id.username }}'s profile</a>

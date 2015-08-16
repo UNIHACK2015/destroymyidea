@@ -3,25 +3,22 @@
     <div class="alert alert-danger" ng-if="errors.length" ng-repeat="error in errors">{{ error }}</div>
 
     <div ng-if="status=='creating'">
-        <h2>What is your idea?</h2>
+        <h2 style="text-align: center;">Can't see your idea? Make a New One!</h2>
         <form class="form-horizontal" ng-submit="createIdea()">
             <div class="form-group">
                 <div class="col-sm-10">
                     <input class="form-control"
                            ng-model="newIdea.name"
-                           placeholder="What is your BIG idea?"
+                           placeholder="What is your great idea?"
                            style="padding: 20px;"/>
                 </div>
 
                 <div class="col-sm-2">
-                    <input type="submit" class="btn btn-primary col-sm-2"
+                    <input type="submit" class="btn btn-primary col-sm-2 Button--register"
                            style="height: 40px; width: 100%; line-height: 30px;" value="Submit"/>
-
                 </div>
-
             </div>
-            <a ui-sref="createidea">Provide more information</a>
+            <a ui-sref="createidea" style="text-align: center;">Provide more information</a>
         </form>
     </div>
-
 </div>
