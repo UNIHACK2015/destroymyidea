@@ -13,7 +13,7 @@ var ideaRoutes = new RESTRouter(IdeaModel);
 var routes = ideaRoutes.generateRoutes({index: false, show: false});
 
 function handleError(res, err) {
-    return res.status(500).send(err);
+  return res.status(500).send(err);
 };
 
 routes.get('/search', function (req, res) {
@@ -22,7 +22,7 @@ routes.get('/search', function (req, res) {
         searchConfig.name = new RegExp(req.query.title, "i");
     }
     if (req.query.user_id) {
-        searchConfig.user_id = new RegExp(req.query.user_id, "i");
+        searchConfig.user_id = req.query.user_id;
     }
 
     IdeaModel.find(searchConfig, function (err, ideas) {
@@ -63,6 +63,12 @@ routes.get('/', function (req, res) {
     query = pager(req, query);
     query = query.populate('user_id', 'username').populate('comments comments.replies.user_id');
 
+    if(req.query.page) {
+      var perPage = 10;
+      var offset = req.query.page * perPage;
+      query.skip(offset).limit(perPage);
+    }
+
     query.exec(function (err, items) {
         if (err) {
             return handleError(res, err);
@@ -85,25 +91,24 @@ routes.get('/:id', function (req, res) {
 });
 
 routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
-    IdeaModel.findById(req.params.id, function (err, idea) {
-        if (err) {
-            return handleError(res, err);
-        }
+  IdeaModel.findById(req.params.id, function (err, idea) {
+    if (err) {
+      return handleError(res, err);
+    }
 
-        var foundCommentIndex = _.findIndex(req.user.votes.ideas, function (idea) {
-            return idea.idea_id == req.params.id;
-        });
+    var foundCommentIndex = _.findIndex(req.user.votes.ideas, function (idea) {
+      return idea.idea_id == req.params.id;
+    });
 
-        var newRating = 0;
+    var newRating = 0;
 
-        var backit = 0;
-        var destroyit = 0;
+    var backit = 0;
+    var destroyit = 0;
 
 
-        if (foundCommentIndex > -1) {
-            // Updating existing vote
-            var foundComment = req.user.votes.ideas[foundCommentIndex];
-
+    if (foundCommentIndex > -1) {
+      // Updating existing vote
+      var foundComment = req.user.votes.ideas[foundCommentIndex];
             if (foundComment.vote == 0) {
                 /* Comment had no original vote */
                 if (req.body.change > 0) backit = 1;
@@ -138,19 +143,23 @@ routes.put('/:id/vote', auth.isAuthenticated(), function (req, res) {
         idea.rating.destroy_it += destroyit;
         console.log(req.body);
 
+    // add/remove from user points
+    idea.user_id.points += backit;
+    idea.user_id.points -= destroyit;
 
-        idea.save(function (err, item) {
-            if (err) {
-                return handleError(res, err);
-            }
-            return res.status(200).json(item);
-        });
+    idea.save(function (err, item) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.status(200).json(item);
     });
+
+  });
 });
 
 routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function (req, res) {
-    IdeaModel.findById(req.params.ideaId, function (err, idea) {
-        var change = req.body.change;
+  IdeaModel.findById(req.params.ideaId, function (err, idea) {
+    var change = req.body.change;
 
         var backit = 0;
         var destroyit = 0;
@@ -164,48 +173,54 @@ routes.put('/:ideaId/comments/:commentId/vote', auth.isAuthenticated(), function
             return comment.comment_id == req.params.commentId;
         });
 
-        if (foundCommentIndex >= 0) {
-            console.log('index: ' + foundCommentIndex);
-            var comment = req.user.votes.comments[foundCommentIndex];
+    if (foundCommentIndex >= 0) {
+      console.log('index: ' + foundCommentIndex);
+      var comment = req.user.votes.comments[foundCommentIndex];
 
-            // Updating existing vote
-            if (comment.vote == 0) {
-                if (change > 0) backit = 1;
-                else destroyit = 1;
-            } else if (comment.vote == 1) {
-                backit = -1;
-                destroyit = change == -1 ? 1 : 0;
-            } else if (comment.vote == -1) {
-                backit = change == 1 ? 1 : 0;
-                destroyit = -1;
-            }
-            req.user.votes.comments[foundCommentIndex].vote = (change == comment.vote) ? 0 : change;
-        } else {
-            req.user.votes.comments.push({
-                comment_id: req.params.commentId,
-                vote: change
-            });
-            if (change) backit += 1;
-            else destroyit += 1;
-        }
-        req.user.save();
+      // Updating existing vote
+      if (comment.vote == 0) {
+        if (change > 0) backit = 1;
+        else destroyit = 1;
+      } else if (comment.vote == 1) {
+        backit = -1;
+        destroyit = change == -1 ? 1 : 0;
+      } else if (comment.vote == -1) {
+        backit = change == 1 ? 1 : 0;
+        destroyit = -1;
+      }
+      req.user.votes.comments[foundCommentIndex].vote = (change == comment.vote) ? 0 : change;
+    } else {
+      req.user.votes.comments.push({
+        comment_id: req.params.commentId,
+        vote: change
+      });
+      if (change) backit += 1;
+      else destroyit += 1;
 
-        var ideaCommIndex = _.findIndex(idea.comments, function (comments) {
-            return comments._id == req.params.commentId;
-        });
+    }
+    req.user.save();
 
-        if (idea.comments[ideaCommIndex]) {
-            idea.comments[ideaCommIndex].rating.upvotes += backit;
-            idea.comments[ideaCommIndex].rating.downvotes += destroyit;
-        }
-
-        idea.save(function (err, item) {
-            if (err) {
-                return handleError(res, err);
-            }
-            return res.status(200).json(item);
-        });
+    var ideaCommIndex = _.findIndex(idea.comments, function (comments) {
+      return comments._id == req.params.commentId;
     });
+
+    if (idea.comments[ideaCommIndex]) {
+      idea.comments[ideaCommIndex].rating.upvotes += backit;
+      idea.comments[ideaCommIndex].rating.downvotes += destroyit;
+    }
+
+    // add/remove from user points
+    //idea.user_id.points += backit;
+    //idea.user_id.points -= destroyit;
+
+    idea.save(function (err, item) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.status(200).json(item);
+    });
+
+  });
 });
 
 module.exports = routes;
