@@ -1,13 +1,21 @@
 'use strict';
 
 angular.module('unihack2015App')
-  .controller('UserCtrl', function ($scope, User, $state) {
+  .controller('UserCtrl', function ($scope, User, $state, Idea) {
     $scope.user = {};
     User.getByUName({ 'username' : $state.params.userid }, function (user) {
     	$scope.user = user;
     	$scope.user.userImgPath = 'http://lorempixel.com/g/300/300/abstract';
     	generateLevelData($scope.user.points);
+
+    	console.log($scope.user);
+    	
+    	Idea.query({user_id: user._id}, function (users) {
+    		console.log(users);
+    	});
     });
+
+
     	// {
     	// 	'username' : 'TheKiller',
     	// 	'userImgPath' : '../../assets/images/person.png',

@@ -16,7 +16,12 @@ angular.module('unihack2015App')
                 method: 'GET',
                 url: '/api/ideas/search',
                 isArray: true
+            },
+            commentVote: {
+                method: 'PUT',
+                url: '/api/ideas/:ideaId/comments/:commentId/vote'
             }
         });
 
-    }]);
+    }])
+;

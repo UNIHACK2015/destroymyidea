@@ -6,20 +6,34 @@
 
     <div class="HeaderContent PageBanner">
         <div class="HeaderContentInner">
-            <form>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="form-group col-lg-3">
+            <div ng-if="createState == 'created'">
+                <h2 style="color: green;">Your idea has been created! Get ready for it to be destroyed!</h2>
+                <button class="btn btn-primary" ng-click="goToNew()">See your idea</button>
+            </div>
+            <div ng-if="createState == 'creating'">
+                <form>
+                    <div class="form-group">
+                        <div>
+                            <div class="alert alert-danger" ng-if="errors.length" ng-repeat="error in errors">{{ error
+                                }}
+                            </div>
                         </div>
-                        <div class="form-group col-lg-6">
-                            <input type="text" class="form-control Search--field" id="search" placeholder="">
-                        </div>
-                        <div class="form-group col-lg-3">
+                        <div class="row">
+                            <div class="form-group col-lg-3">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" ng-model="newIdea" class="form-control Search--field" id="search"
+                                       placeholder="">
+                            </div>
+                            <div class="form-group col-lg-3">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-default Button--search">Destroy My Idea!</button>
-            </form>
+                    <button type="submit" ng-click="createIdea(newIdea)" class="btn btn-default Button--search">Destroy My
+                        Idea!
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
