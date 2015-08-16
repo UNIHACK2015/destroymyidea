@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('unihack2015App')
-    .directive('simpleIdea', function (Idea) {
+    .directive('simpleIdea', function (Idea, Auth) {
         return {
             templateUrl: 'app/directives/simpleIdea/simpleIdea.html',
             restrict: 'EA',
@@ -23,11 +23,14 @@ angular.module('unihack2015App')
                         scope.errors = ['You must provide your idea!'];
                         return;
                     }
-                    Idea.save(scope.newIdea, function (success) {
+
+
+                    var toSubmit = scope.newIdea;
+                    toSubmit.user_id = Auth.getCurrentUser()._id;
+
+                    Idea.save(toSubmit, function (success) {
                         scope.status = 'success';
-                        console.log(scope);
-                        scope.successes = ['Thanks for your idea! Get ready to have it destroyed >:D']
-                        console.log(success);
+                        scope.successes = ['Thanks for your idea! Get ready to have it destroyed >:D'];
                         scope.update({'newIdea': success});
                     });
                 }

@@ -8,10 +8,8 @@ angular.module('unihack2015App')
     	$scope.user.userImgPath = 'http://lorempixel.com/g/300/300/abstract';
     	generateLevelData($scope.user.points);
 
-    	console.log($scope.user);
-    	
     	Idea.query({user_id: user._id}, function (users) {
-    		console.log(users);
+    		$scope.ideas = users;
     	});
     });
 

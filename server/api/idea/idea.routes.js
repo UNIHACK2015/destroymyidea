@@ -7,6 +7,7 @@ var IdeaModel = require('./idea.model.js');
 var auth = require('./../../auth/auth.service');
 var _ = require('lodash');
 var User = require('../user/user.controller.js');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 var ideaRoutes = new RESTRouter(IdeaModel);
 var routes = ideaRoutes.generateRoutes({index: false, show: false});
@@ -38,11 +39,10 @@ routes.get('/', function (req, res) {
         searchConfig.name = new RegExp(req.query.title, "i");
     }
     if (req.query.user_id) {
-        searchConfig.user_id = new RegExp(req.query.user_id, "i");
+        searchConfig.user_id = new ObjectId(req.query.user_id);
     }
     var query = IdeaModel.find(searchConfig);
     if (req.query.sort) {
-        console.log('sorting');
         var sort = {};
         switch (req.query.sort) {
             case 'best':

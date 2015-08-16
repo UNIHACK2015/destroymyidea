@@ -25,19 +25,25 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Comments</h2>
-			<div ng-repeat=''>
-				<p><p>
-			</div>
-		</div>
-	</div>
+	<br/>
+	<br/>
 
 	<div class="row">
 		<div class="col-md-12">
 			<h2>Ideas</h2>
-			<div ng-repeat=''>
+            <div class="List List--col-md-3  List--col-sm-2 List--col-xs-1">
+                <idea-card ng-repeat="idea in ideas" idea="idea" class="List_Item"></idea-card>
+            </div>
+		</div>
+	</div>
+
+	<br/>
+	<br/>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Comments</h2>
+			<div>
 				<h3></h3>
 				<p><p>
 			</div>
