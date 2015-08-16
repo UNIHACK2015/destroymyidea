@@ -1,89 +1,156 @@
 <div class="Block--background">
-    <div ng-include="'components/navbar/navbar.html'"></div>
+  <div ng-include="'components/navbar/navbar.html'"></div>
 
-    <div class="HeaderContent PageBanner">
-        <div class="HeaderContentInner">
-            <div ng-if="createState == 'created'">
-                <h2 style="color: green;">Your idea has been created! Get ready for it to be destroyed!</h2>
-                <button class="btn btn-primary" ng-click="goToNew()">See your idea</button>
+  <div class="HeaderContent PageBanner">
+    <div class="HeaderContentInner">
+      <div ng-if="createState == 'created'">
+        <h2 style="color: green;">Your idea has been created! Get ready for it to be destroyed!</h2>
+        <button class="btn btn-primary" ng-click="goToNew()">See your idea</button>
+      </div>
+      <div ng-if="createState == 'creating'">
+        <form>
+          <div class="form-group">
+            <div>
+              <div class="alert alert-danger" ng-if="errors.length" ng-repeat="error in errors">{{ error
+                }}
+              </div>
             </div>
-            <div ng-if="createState == 'creating'">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <div class="alert alert-danger" ng-if="errors.length" ng-repeat="error in errors">{{ error
-                                }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-3">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" ng-model="newIdea" class="form-control Search--field" id="search"
-                                       placeholder="">
-                            </div>
-                            <div class="form-group col-lg-3">
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" ng-click="createIdea(newIdea)" class="btn btn-default Button--search">Destroy My
-                        Idea!
-                    </button>
-                </form>
+            <div class="row">
+              <div class="form-group col-lg-3">
+              </div>
+              <div class="form-group col-lg-6">
+                <input type="text" ng-model="newIdea" class="form-control Search--field" id="search"
+                       placeholder="">
+              </div>
+              <div class="form-group col-lg-3">
+              </div>
             </div>
-        </div>
+          </div>
+          <button type="submit" ng-click="createIdea(newIdea)" class="btn btn-default Button Button--create">Destroy My
+            Idea!
+          </button>
+          <button type="submit" ng-click="createIdea(newIdea)" class="btn btn-default Button Button--search">Search
+            Similar
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
-<div id="about" style="margin-top: 100px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Why Does this Even Exist?</h2>
 
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-            </div>
+<div id="register" style="margin-top: 150px; margin-bottom: 150px;">
+  <div class="container-fluid">
+    <section class="container">
+      <div class="container-page">
+        <div class="col-md-6">
+          <h3 class="dark-grey">Registration</h3>
+
+          <div class="form-group col-lg-12">
+            <label>Username</label>
+            <input type="" name="" class="form-control" id="" value="">
+          </div>
+
+          <div class="form-group col-lg-6">
+            <label>Password</label>
+            <input type="password" name="" class="form-control" id="" value="">
+          </div>
+
+          <div class="form-group col-lg-6">
+            <label>Repeat Password</label>
+            <input type="password" name="" class="form-control" id="" value="">
+          </div>
+
+          <div class="form-group col-lg-12">
+            <label>Email Address</label>
+            <input type="" name="" class="form-control" id="" value="">
+          </div>
+
+          <div class="checkbox">
+            <label style="margin-left: 15px;">
+              <input type="checkbox"> I agree to the Terms of Usage
+            </label>
+          </div>
+
+          <div class="form-group col-lg-6">
+            <button type="submit" class="btn btn-primary Button--register" style="margin-left: 80%;">Register</button>
+          </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-4">
-                    <span class="fa-stack fa-5x ">
-                        <Img class="Icon" src="/assets/images/icons/business/feedback11.png">
-                    </span>
-                <h4 class="service-heading">Instant Feedback</h4>
 
-                <p class="text-muted">Instantly gain feedback from users across the world. Discover </p>
-            </div>
-            <div class="col-md-4">
-                    <span class="fa-stack fa-5x ">
-                       <Img class="Icon" src="/assets/images/icons/business/networking11.png">
-                    </span>
-                <h4 class="service-heading">Crowd-Sourced Competitor Analysis</h4>
+        <div class="col-md-6">
+          <h3 class="dark-grey">Login</h3>
 
-                <p class="text-muted">Get insight into what competition exists and use this information to calculate
-                    market positioning and strategic management. With wide variety you will be equipped with the
-                    knowledge needed
-                    to position yourself strategically and identify opportunities and potential threats.</p>
-            </div>
-            <div class="col-md-4 ImageIcon">
+          <div class="form-group col-lg-12">
+            <label>Username</label>
+            <input type="" name="" class="form-control" id="" value="">
+          </div>
+
+          <div class="form-group col-lg-12">
+            <label>Password</label>
+            <input type="password" name="" class="form-control" id="" value="">
+          </div>
+
+          <div class="form-group col-lg-6">
+            <button type="submit" class="btn btn-primary Button--register" style="margin-left: 90%;">Login</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="Block--background">
+  <div id="about" style="padding-top: 150px; padding-bottom: 150px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">Why Does this Even Exist?</h2>
+
+          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4 ImageIcon">
+                    <span class="fa-stack fa-5x ">
+                        <Img class="ImageIcon_Image" src="/assets/images/icons/business/feedback11.png">
+                    </span>
+          <h4 class="ImageIcon_Heading">Instant Feedback</h4>
+
+          <p class="text-muted">Instantly gain feedback from users across the world. Discover </p>
+        </div>
+        <div class="col-md-4 ImageIcon">
+                    <span class="fa-stack fa-5x ">
+                       <Img class="ImageIcon_Image" src="/assets/images/icons/business/networking11.png">
+                    </span>
+          <h4 class="ImageIcon_Heading">Crowd-Sourced Competitor Analysis</h4>
+
+          <p class="text-muted">Get insight into what competition exists and use this information to calculate
+            market positioning and strategic management. With wide variety you will be equipped with the
+            knowledge needed
+            to position yourself strategically and identify opportunities and potential threats.</p>
+        </div>
+        <div class="col-md-4 ImageIcon">
                     <span class="fa-stack fa-5x ">
                         <Img class="ImageIcon_Image" src="/assets/images/icons/business/ideas11.png">
                     </span>
-                <h4 class="ImageIcon_Heading">Identify Issues</h4>
+          <h4 class="ImageIcon_Heading">Identify Issues</h4>
 
-                <p class="text-muted">Discover problems potentially overlooked by owners or key stakeholders</p>
-            </div>
+          <p class="text-muted">Discover problems potentially overlooked by owners or key stakeholders</p>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p>Copyright (c) 2015 The Paradoxical Iterators</p>
+  <div class="container">
+    <p>Copyright (c) 2015 The Paradoxical Iterators</p>
 
-        <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
+    <p>Development: Alex Robinson, Joey Lee, Paul Davidson</p>
 
-        <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
+    <p>UX/UI Development: Rebecca Trapani, Paul Davidson</p>
 
-        <p>Built for: UNIHACK 2015</p>
-    </div>
+    <p>Built for: UNIHACK 2015</p>
+  </div>
 </footer>
 

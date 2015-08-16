@@ -85,10 +85,11 @@ angular.module('unihack2015App')
       });
     };
 
-    $scope.loadData = function() {
-      Idea.query({page: currPage}, function(ideas) {
+    $scope.loadData = function () {
+      Idea.query({page: currPage}, function (ideas) {
         $scope.ideas = $scope.ideas.concat(ideas);
         currPage++;
       });
     }
   }]);
+
